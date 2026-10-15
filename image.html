@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Image Library | Delhi Unlocked</title>
+<style>
+:root{--green:#173d31;--cream:#f7f2e7;--paper:#fffdf7;--gold:#b88d43;--ink:#203129;--muted:#68736b;--line:#e7dfce}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{width:min(1160px,92%);margin:auto}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:Georgia,serif;font-weight:700;font-size:1.2rem;color:var(--green)}
+.brand-mark{width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold)}
+.nav a.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:5px;font-weight:650;background:var(--green);color:#fff}
+.hero{background:var(--green);color:#fff;padding:48px 0;text-align:center}
+.hero h1{font:500 clamp(1.8rem,4vw,2.6rem)/1.15 Georgia,serif;margin:8px 0 10px}
+.hero p{max-width:640px;margin:auto;color:#d8e0d6}
+.section{padding:36px 0}
+.section h2{font:500 clamp(1.4rem,2.6vw,1.9rem)/1.2 Georgia,serif;color:var(--green);margin:6px 0 14px}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:750;color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.card img{width:100%;height:150px;object-fit:cover;cursor:zoom-in}
+.card .b{padding:10px 12px;font-size:.78rem;color:var(--muted);word-break:break-all}
+.link-row{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:10px;font-size:.82rem;word-break:break-all;color:#4b5852}
+.link-row strong{color:var(--green)}
+.lightbox{position:fixed;inset:0;background:#000c;z-index:99;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}.lightbox img{max-width:100%;max-height:100%;border-radius:6px}
+.footer{background:#102d23;color:#cbd5cb;padding:26px 0;text-align:center;font-size:.85rem}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="wrap nav">
+  <a href="index.html" class="brand"><span class="brand-mark">✦</span><span>DELHI <span style="color:var(--gold)">UNLOCKED</span></span></a>
+  <a class="btn" href="index.html">← Back to home</a>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)">Central library</div>
+    <h1>All image links in one place</h1>
+    <p>Every photo used across Delhi Unlocked. All images are hosted publicly on Google Drive and rendered via the <code>thumbnail</code> endpoint for fast, cached delivery.</p>
+  </div>
+</section>
+
+<main>
+  <section class="section"><div class="wrap">
+    <div class="eyebrow">Preview grid</div>
+    <h2>All photos</h2>
+    <div class="grid" id="grid"></div>
+  </div></section>
+
+  <section class="section" style="background:#fffaf0"><div class="wrap">
+    <div class="eyebrow">Raw links</div>
+    <h2>Copy-paste URLs</h2>
+    <div id="links"></div>
+  </div></section>
+</main>
+
+<footer class="footer">© Delhi Unlocked · Image Library</footer>
+<div class="lightbox" id="lb"><img alt=""></div>
+
+<script>
+/* ---- Image library (id + which tour it belongs to) ---- */
+const IMAGES = [
+  // Old Delhi Walking Tour
+  ['1ltBXz-3xtdhpU7t9XbwMk_MRL1cADaUP','Old Delhi Walking Tour'],
+  ['1NQfZ52_GNGyVkp60H7krFjKKOY8iQ3P_','Old Delhi Walking Tour'],
+  ['1lwCjyWmbqBvY0EmP667k7VqAWMkcmgx0','Old Delhi Walking Tour'],
+  ['1lTtilCuRNel1kJ3UK0vH8T51e039Fz7b','Old Delhi Walking Tour'],
+  ['1c6J7YnkrqCffYfZbhrh5_sska8rVfpSr','Old Delhi Walking Tour'],
+  ['16UubCWlWlqDzPbV4zXzmCqMVMTGgkVMG','Old Delhi Walking Tour'],
+  ['1Ka24bpLpOS6MNL5dUfAolo_WoQ3npSPf','Old Delhi Walking Tour'],
+  ['1g7dUBTL3kkDbDK-3U2DJVd0GFyak-531','Old Delhi Walking Tour'],
+  ['1wASr0zzGrVc-DAu4WBCIYroY9nFTrtBz','Old Delhi Walking Tour'],
+  // Old Delhi Food Tour
+  ['1qvlveKcRhehUFZ6KZvVMuzfgps0A5grm','Old Delhi Food Tour'],
+  ['1EY8WsnBniA78c5SpLSrrLdZr3UBZJzzE','Old Delhi Food Tour'],
+  ['1XuR4ctqi0nCjla0r3Td8VeD8nMH4nOOX','Old Delhi Food Tour'],
+  ['1VWD8Wh7nCMP8r-_BuRTRR8siqUlBUH6h','Old Delhi Food Tour'],
+  ['1KsuLogfRg9UwgBtytHdijSzOTn-RtUvI','Old Delhi Food Tour'],
+  // Night Tour
+  ['1UZwKNLlqITJXmagzDtSNxXQTzUl1CYXk','New Delhi Night Tour'],
+  ['1Or01sbSUW5xJTHR8QFJ90nvmPwF4ZrqI','New Delhi Night Tour'],
+  ['1H_VK58s8RcmnozchrP7l6WNqYKMKw0jQ','New Delhi Night Tour'],
+  ['1hEYJ0G-soTPKwz57_oLZ2uKnx6BKs7WP','New Delhi Night Tour'],
+  // Metro Tour
+  ['1SDXB5djHuEcEX1KmHWfUCQUSCDcVgcSq','Old & New Delhi by Metro'],
+  ['1xc84pw22AaDeatk_p0tuyUaWQjOlbYlp','Old & New Delhi by Metro'],
+  ['1UbTmj0hd0EYdCYMUJ0QrwJnO0jFK4EVJ','Old & New Delhi by Metro'],
+  // Full day
+  ['1qpADv1GWaD2ji4XRggDUGcLX4EHVfvvJ','Full-Day Delhi Sightseeing'],
+  ['1cAaYr17JpRQvec4ZYLIX4lvOI6ehskaN','Full-Day Delhi Sightseeing'],
+  ['1doLaM0Hp41IoNyLBO5Uco7LKUI7vJffE','Full-Day Delhi Sightseeing'],
+  ['172UQg525McxdDqydfDvy2g_s7Xi6um6h','Full-Day Delhi Sightseeing'],
+  // Agra
+  ['1-M6grd3YVlBpAlrKdU7hhkQ3BW6Tjad6','Same-Day Agra Tour'],
+  ['1v0wunPP2UkDS_uUKIWhHp_P5i3Y4hAQv','Same-Day Agra Tour'],
+  ['1o0S-FOfwqGHkK_zLkDxNP1pqGYy2YEEW','Same-Day Agra Tour'],
+  // Golden Triangle
+  ['1dAchxF6LcQj0AQ5L5nTxmjUPKVAEKDXR','Golden Triangle'],
+  ['1NHi35-T_p3MqB3r_mn0eSydcCmFMrafz','Golden Triangle'],
+  ['15i200U1FG2vRUet3kRPlgG4pQ_atIfiR','Golden Triangle'],
+  ['1qtvWCk_818K-oUvpZPhdgPJ4T1WEE-Lw','Golden Triangle'],
+  // Sanjay Colony
+  ['1eNCnuSiNnbibPxCyi1v8ExLmO2Oe9g2I','Sanjay Colony Community Tour'],
+  ['1H5h4niuDurTkUe6130q-OqAsURsbBDSf','Sanjay Colony Community Tour'],
+  ['173_y8kgm5s-WwlrhKkB9P3STEly28aYe','Sanjay Colony Community Tour']
+];
+
+const view = id => 'https://drive.google.com/file/d/' + id + '/view?usp=sharing';
+const thumb = id => 'https://drive.google.com/thumbnail?id=' + id + '&sz=w900';
+
+document.getElementById('grid').innerHTML = IMAGES.map(([id, tour]) =>
+  `<div class="card"><img src="${thumb(id)}" alt="${tour}" loading="lazy" data-id="${id}">
+   <div class="b">${tour}<br><span style="opacity:.7">${id}</span></div></div>`
+).join('');
+
+document.getElementById('links').innerHTML = IMAGES.map(([id, tour]) =>
+  `<div class="link-row"><strong>${tour}</strong><br>View: <a href="${view(id)}" target="_blank" rel="noopener">${view(id)}</a><br>
+  Direct: <a href="${thumb(id)}" target="_blank" rel="noopener">${thumb(id)}</a></div>`
+).join('');
+
+/* lightbox */
+const lb = document.getElementById('lb'), im = lb.querySelector('img');
+document.getElementById('grid').addEventListener('click', e => {
+  const t = e.target.closest('img'); if (!t) return;
+  im.src = t.src; lb.classList.add('open');
+});
+lb.addEventListener('click', () => lb.classList.remove('open'));
+</script>
+</body>
+</html>

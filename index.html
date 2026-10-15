@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Discover Delhi with local guides. Old Delhi food &amp; heritage walks, community tours, night tours, Agra and Golden Triangle trips with Delhi Unlocked.">
+<title>Delhi Unlocked — Discover the city beyond the guidebook</title>
+<style>
+:root{--green:#173d31;--green2:#245342;--cream:#f7f2e7;--paper:#fffdf7;--gold:#b88d43;--ink:#203129;--muted:#68736b;--line:#e7dfce;--white:#fff;--navy:#12355b;--navy-dark:#0c2542}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button,a,.btn{cursor:pointer}
+img{max-width:100%;display:block}
+.wrap{width:min(1160px,92%);margin:auto}
+.topline{background:var(--green);color:#f9f4e8;text-align:center;padding:8px 12px;font-size:.83rem;letter-spacing:.04em}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;font-family:Georgia,serif;font-weight:bold;font-size:1.4rem;color:var(--green)}
+.brand-mark{
+  width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;
+  overflow:hidden;display:grid;place-items:center;flex:0 0 auto;background:#fff;
+}
+.brand-mark img{width:100%;height:100%;object-fit:cover;display:block}
+.navlinks{display:flex;align-items:center;gap:24px;font-size:.93rem;flex-wrap:wrap}
+.navlinks a:hover{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:5px;border:1px solid transparent;font-weight:650;transition:.2s}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+.btn-outline{border-color:var(--green);color:var(--green);background:transparent}
+.btn-gold{background:var(--gold);color:#172b21}
+.btn-gold:hover{filter:brightness(1.06)}
+
+/* ================= HERO =================
+   Center-middle of the image is what shows on large screens.
+   Bottom-gradient kept light so more of the photo reads through. */
+.hero{
+  position:relative;isolation:isolate;min-height:535px;display:flex;align-items:center;color:#fff;
+  background:
+    linear-gradient(90deg,rgba(15,42,32,.86),rgba(15,42,32,.48) 56%,rgba(15,42,32,.12)),
+    url('https://drive.google.com/thumbnail?id=1UZwKNLlqITJXmagzDtSNxXQTzUl1CYXk&sz=w2200')
+    center center / cover no-repeat;
+}
+.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(12,34,25,.12),transparent 55%)}
+.hero-content{max-width:700px;padding:75px 0}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;font-weight:750;color:var(--gold)}
+.hero h1{font:500 clamp(2.6rem,6vw,5rem)/1.05 Georgia,serif;margin:16px 0 20px;letter-spacing:-.03em}
+.hero p{max-width:570px;font-size:1.1rem;color:#f5f1e8}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .btn-outline{color:#fff;border-color:#e5dfd0}
+.trustline{display:flex;gap:20px;flex-wrap:wrap;margin-top:30px;font-size:.88rem;color:#f4ecda}
+.trustline span:before{content:'✦';color:var(--gold);margin-right:8px}
+
+.section{padding:76px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.section h2{font:500 clamp(2rem,4vw,3.1rem)/1.12 Georgia,serif;color:var(--green);margin:9px 0 10px}
+.section-head p{max-width:580px;color:var(--muted);margin:0}
+
+/* Slightly narrower card column so cards read a bit smaller */
+#tourGrid{max-width:950px;margin-left:auto;margin-right:auto}
+.tour-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.tour-card{background:var(--paper);border:1px solid var(--line);border-radius:9px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 5px 18px rgba(30,49,39,.035)}
+.tour-image{height:200px;position:relative;background:#d7d1c4;overflow:hidden}
+.tour-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.tour-card:hover .tour-image img{transform:scale(1.04)}
+.tour-slideshow{position:absolute;inset:0;overflow:hidden}
+.tour-slideshow .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.tour-slideshow .slide.active{opacity:1}
+.tour-slideshow .slide-dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:5px;z-index:2}
+.tour-slideshow .slide-dots i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.tour-slideshow .slide-dots i.active{background:#fff}
+.tag{position:absolute;left:14px;top:14px;background:var(--cream);color:var(--green);padding:6px 10px;border-radius:3px;font-size:.75rem;font-weight:750;z-index:3}
+.tour-body{padding:20px;display:flex;flex-direction:column;flex:1}
+.meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:.82rem}
+.tour-body h3{font:500 1.45rem/1.2 Georgia,serif;color:var(--green);margin:12px 0 9px}
+.tour-body p{margin:0 0 18px;color:#58665d;font-size:.92rem}
+.tour-foot{margin-top:auto;padding-top:15px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-size:1.2rem;font-weight:800;color:var(--green)}
+.price small{display:block;font-size:.72rem;font-weight:500;color:var(--muted)}
+.text-btn{border:0;background:transparent;color:var(--green);font-weight:750;padding:8px 0}
+.text-btn:hover{color:var(--gold)}
+
+.band{background:var(--green);color:#f7f1e4}
+.band-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.band h2{color:#fff8e9}
+.band p{color:#d8e0d6}
+.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:25px}
+.feature{border-top:1px solid rgba(255,255,255,.22);padding-top:15px}
+.feature strong{display:block;color:#fff4d9;margin-bottom:4px}
+.feature span{font-size:.9rem;color:#d5ded5}
+.image-stack{position:relative;min-height:390px}
+.image-stack img{position:absolute;object-fit:cover;border-radius:7px;box-shadow:0 15px 35px #102b2255}
+.image-stack img:first-child{width:73%;height:330px;right:0;top:0}
+.image-stack img:last-child{width:56%;height:230px;left:0;bottom:0;border:7px solid var(--green)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{padding:24px;background:var(--paper);border:1px solid var(--line);border-radius:7px}
+.step-no{color:var(--gold);font:italic 2rem Georgia,serif}
+.step h3{font:500 1.35rem Georgia,serif;color:var(--green);margin:10px 0}
+.step p{color:var(--muted);font-size:.93rem;margin:0}
+
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
+.about-photo{height:440px;border-radius:8px;overflow:hidden;background:#ddd}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-copy p{color:var(--muted)}
+.team-note{padding:16px 18px;background:#efe7d6;border-left:3px solid var(--gold);margin-top:20px;font-size:.92rem}
+
+.faq-list{max-width:850px;margin:auto}
+.faq-list details{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:17px 20px;margin-bottom:10px}
+.faq-list summary{font-weight:700;color:var(--green);cursor:pointer}
+.faq-list details p{color:var(--muted);margin-bottom:0}
+
+.booking{background:#eee5d2}
+.booking-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:start}
+.booking h2{margin-top:8px}
+.booking-intro{color:var(--muted)}
+.contact-card{background:var(--green);color:#fff;border-radius:8px;padding:25px;margin-top:25px}
+.contact-card p{color:#e0e8df}
+.form{background:var(--paper);padding:27px;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 25px #193d2d0a}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.86rem;font-weight:700;color:var(--green)}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #d9d2c4;border-radius:4px;background:#fffefb;color:var(--ink)}
+.field textarea{min-height:105px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid #b88d4366;border-color:var(--gold)}
+.form-note{font-size:.82rem;color:var(--muted);margin:13px 0}
+.form-result{display:none;padding:14px;background:#e8f0e7;border:1px solid #bdd1bd;color:#214c34;border-radius:5px;margin-top:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+
+.footer{background:#102d23;color:#e9e3d5;padding:45px 0 20px}
+.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:35px}
+.footer h3{font:500 1.3rem Georgia,serif;color:#fff2d7}
+.footer p,.footer a{color:#cbd5cb;font-size:.9rem}
+.footer-links{display:grid;gap:8px}
+.copyright{border-top:1px solid #ffffff26;margin-top:35px;padding-top:17px;color:#aab9ac;font-size:.8rem;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.mobile-cta{display:none}
+
+/* ================= GALLERY ("Real moments") =================
+   Always a horizontal strip. The script advances it one card
+   every second (auto-scroll), looping back to the start. */
+#galleryGrid{
+  display:flex;
+  flex-wrap:nowrap;
+  grid-template-columns:unset;
+  position:relative;
+  gap:18px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:4px 4px 16px;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  overscroll-behavior-x:contain;
+  max-width:none;
+}
+#galleryGrid::-webkit-scrollbar{display:none}
+#galleryGrid .tour-card{flex:0 0 240px;max-width:240px}
+#galleryGrid .tour-image{height:170px}
+
+/* ================= MODAL =================
+   Only the top bar (title + close) is fixed.
+   No footer. The tour page itself carries its own Book CTA. */
+.modal{position:fixed;inset:0;background:#081b14c0;z-index:60;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal-card{
+  width:min(1040px,100%);height:min(92vh,100%);
+  background:var(--paper);border-radius:10px;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 25px 70px #06130e66;animation:pop .22s ease;
+}
+@keyframes pop{from{transform:translateY(14px);opacity:.4}to{transform:none;opacity:1}}
+.modal-head{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 20px;border-bottom:1px solid var(--navy-dark);
+  background:var(--navy);color:#fff;position:relative;z-index:2;
+}
+.modal-head h2{font:500 1.35rem/1.2 Georgia,serif;color:#fff;margin:0}
+.modal-x{
+  flex:0 0 auto;width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.08);color:#fff;font-size:1.05rem;line-height:1;
+  display:grid;place-items:center;transition:.2s;
+}
+.modal-x:hover{background:#fff;color:var(--navy);border-color:#fff}
+.modal-body{flex:1 1 auto;position:relative;overflow:auto;background:#fff;display:flex;-webkit-overflow-scrolling:touch}
+.modal-body iframe{flex:1 1 auto;width:100%;height:100%;min-height:70vh;border:0;display:block}
+.modal-body .loader{padding:40px;color:var(--muted);font-size:.95rem;margin:auto}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:950px){
+  #galleryGrid .tour-card{flex:0 0 220px;max-width:220px}
+}
+@media(max-width:850px){
+  .navlinks{gap:13px}
+  .navlinks a:not(.btn){display:none}
+  .tour-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .band-grid,.about-grid,.booking-grid{grid-template-columns:1fr;gap:30px}
+  .image-stack{min-height:330px;max-width:600px;width:100%}
+  .image-stack img:first-child{height:280px}
+  .image-stack img:last-child{height:190px}
+  .steps{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid>div:first-child{grid-column:1/-1}
+}
+@media(max-width:768px){
+  #galleryGrid .tour-card{flex:0 0 210px;max-width:210px}
+  #galleryGrid .tour-image{height:170px}
+}
+@media(max-width:560px){
+  .topline{font-size:.75rem}
+  .nav{padding:13px 0}
+  .brand{font-size:1.18rem}
+  .brand-mark{width:36px;height:36px}
+  .navlinks .btn{padding:10px 12px;font-size:.85rem}
+  .hero{min-height:570px;background-position:58% center}
+  .hero-content{padding:55px 0}
+  .hero h1{font-size:3rem}
+  .hero p{font-size:1rem}
+  .section{padding:55px 0}
+  .section-head{display:block}
+  .tour-grid{grid-template-columns:1fr}
+  .tour-image{height:220px}
+  .feature-list{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .form{padding:19px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-grid>div:first-child{grid-column:auto}
+  .mobile-cta{display:flex;position:fixed;bottom:10px;left:10px;right:10px;z-index:10;box-shadow:0 5px 25px #102d2366}
+  .mobile-cta .btn{flex:1}
+  .copyright{padding-bottom:55px}
+  .modal{padding:0}
+  .modal-card{height:100%;max-height:100%;border-radius:0}
+  .modal-body iframe{min-height:60vh}
+  #galleryGrid .tour-card{flex:0 0 78%;max-width:290px}
+  #galleryGrid .tour-image{height:190px}
+}
+</style>
+</head>
+<body>
+
+<!-- <div class="topline">LOCAL STORIES. REAL CONNECTIONS. A DIFFERENT SIDE OF DELHI.</div> -->
+
+<header class="wrap nav">
+  <a href="#home" class="brand">
+    <span class="brand-mark">
+      <img src="https://drive.google.com/thumbnail?id=1R_Q46xTV1OXJjcXdPQ0SjRh-P1ZULEYw&sz=w200" alt="Delhi Unlocked logo" loading="eager">
+    </span>
+    <span>DELHI <span style="color:var(--gold)">UNLOCKED</span></span>
+  </a>
+  <nav class="navlinks">
+    <a href="#tours">Our tours</a>
+    <a href="#about">Our story</a>
+    <a href="#gallery">Photos</a>
+    <a href="#faq">FAQs</a>
+    <a class="btn btn-primary" href="#booking">Book / Enquire Now ↗</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="eyebrow">See Delhi through local eyes</div>
+        <h1>Discover the city<br>behind the monuments.</h1>
+        <p>From the flavours of Old Delhi to neighbourhood stories and unforgettable heritage, explore the capital with people who call it home.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#tours">Explore our experiences ↗</a>
+          <a class="btn btn-outline" target="_blank" rel="noopener"
+             href="https://wa.me/919220409077?text=Hello%20Delhi%20Unlocked%2C%20I%20would%20like%20to%20enquire%20about%20a%20tour.">WhatsApp us ↗</a>
+          <a class="btn btn-outline" href="#about">Meet your local guides</a>
+        </div>
+        <div class="trustline">
+          <span>Small-group experiences</span>
+          <span>Local-led journeys</span>
+          <span>Personal enquiries</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TOURS ================= -->
+  <section class="section" id="tours">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Find your Delhi</div>
+          <h2>Popular Experiences</h2>
+          <p>Choose a short walk, a full day of discovery, or a journey beyond Delhi. Tap <strong>More details</strong> on any card — the full tour page opens right here in a pop-up.</p>
+        </div>
+        <a class="btn btn-outline" href="#booking">Ask us to plan a trip</a>
+      </div>
+      <div class="tour-grid" id="tourGrid"><!-- built by JS from TOURS --></div>
+    </div>
+  </section>
+
+  <!-- ================= BAND ================= -->
+  <section class="section band">
+    <div class="wrap band-grid">
+      <div>
+        <div class="eyebrow">More than a sightseeing tour</div>
+        <h2>Meet the city, not just the sights.</h2>
+        <p>Delhi is a city of layers—centuries of history, street-food traditions, bustling markets and everyday neighbourhood life. We bring those stories together through thoughtful, locally led experiences.</p>
+        <div class="feature-list">
+          <div class="feature"><strong>Local perspective</strong><span>Stories and context beyond a guidebook.</span></div>
+          <div class="feature"><strong>Personal attention</strong><span>Tell us your interests and travel style.</span></div>
+          <div class="feature"><strong>Clear information</strong><span>Know the price, duration and meeting point before you enquire.</span></div>
+          <div class="feature"><strong>Respectful travel</strong><span>Experiences built around people and place.</span></div>
+        </div>
+      </div>
+      <div class="image-stack">
+        <img src="https://drive.google.com/thumbnail?id=1lTtilCuRNel1kJ3UK0vH8T51e039Fz7b&sz=w1200" alt="Historic architecture in Delhi" loading="lazy">
+        <img src="https://drive.google.com/thumbnail?id=1qvlveKcRhehUFZ6KZvVMuzfgps0A5grm&sz=w900" alt="Street food in Old Delhi" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STEPS ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Simple from start to finish</div>
+          <h2>Your trip, your way</h2>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-no">01</div><h3>Choose an experience</h3><p>Browse the tours, prices and details. Not sure what fits? Tell us what you enjoy.</p></div>
+        <div class="step"><div class="step-no">02</div><h3>Send an enquiry</h3><p>Share your date, group size and contact details. We aim to respond within 24 hours.</p></div>
+        <div class="step"><div class="step-no">03</div><h3>Confirm the details</h3><p>We will discuss availability, meeting arrangements and payment before your tour is confirmed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section" id="about" style="background:#fffaf0">
+    <div class="wrap about-grid">
+      <div class="about-photo">
+        <img src="https://drive.google.com/thumbnail?id=1NQfZ52_GNGyVkp60H7krFjKKOY8iQ3P_&sz=w1200" alt="Delhi street life" loading="lazy">
+      </div>
+      <div class="about-copy">
+        <div class="eyebrow">The people behind the walks</div>
+        <h2>Delhi is our home. Let us introduce you.</h2>
+        <p>Delhi Unlocked is being built around a simple idea: the best way to understand a city is to spend time with people who know it. Our local-led experiences connect visitors with Delhi's history, food, culture and everyday life.</p>
+        <p><strong>Meet Badal — Founder &amp; Local Guide</strong><br>
+        Badal has spent years guiding visitors through Delhi and loves helping international travellers understand the city beyond the usual monuments. Delhi Unlocked grew from that simple idea: make every visitor feel welcomed while sharing the history, food, culture and everyday stories that make Delhi special.</p>
+        <p><strong>Our local team</strong><br>
+        We work together to coordinate enquiries and create welcoming, well-organised experiences from the first message to the end of your tour.</p>
+        <div class="team-note">We believe in honest information, thoughtful hosting and respectful encounters with the communities we visit.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY ================= -->
+  <section class="section" style="padding:42px 0;background:#f7f2e7">
+    <div class="wrap">
+      <div class="section-head" style="justify-content:center;text-align:center">
+        <div><div class="eyebrow">Why travel with us</div><h2>Local knowledge. Personal hosting. Clear communication.</h2></div>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-no">01</div><h3>Local-led</h3><p>Explore Delhi with guides who know the city's streets, stories and everyday rhythm.</p></div>
+        <div class="step"><div class="step-no">02</div><h3>Small &amp; personal</h3><p>Tell us your interests and group size so we can make the experience fit your trip.</p></div>
+        <div class="step"><div class="step-no">03</div><h3>Clear details</h3><p>We discuss availability, meeting arrangements, inclusions and payment before confirmation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">See Delhi with us</div>
+          <h2>Real moments from our tours.</h2>
+          <p>Every picture below comes straight from our Google Drive galleries — the same photos you will find inside each tour page.</p>
+        </div>
+        <a class="btn btn-outline" href="#booking">Ask about a tour</a>
+      </div>
+      <div class="tour-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head" style="justify-content:center;text-align:center">
+        <div><div class="eyebrow">Good to know</div><h2>Frequently asked questions</h2><p>Have another question? Send it with your enquiry and our team will get back to you.</p></div>
+      </div>
+      <div class="faq-list">
+        <details><summary>How do I request a tour?</summary><p>Use the enquiry form below to choose your tour, date and group size. We aim to contact you within 24 hours. A request is not a confirmed booking until we confirm availability with you.</p></details>
+        <details><summary>Can I enquire for 1 to 17 people?</summary><p>Yes, the form accepts group sizes from 1 to 17. Actual availability and suitable arrangements depend on the experience and date.</p></details>
+        <details><summary>Are food, transport and monument tickets included?</summary><p>Inclusions vary by tour. Please confirm the final inclusions, exclusions and any entry fees with us before your booking is confirmed. The displayed price should not be treated as confirmation that every expense is included.</p></details>
+        <details><summary>Where do tours start?</summary><p>Several Delhi walking experiences use Rajiv Chowk Metro Station, Gate 8 as a meeting point. The exact meeting point for your selected experience will be confirmed with you before the tour.</p></details>
+        <details><summary>Can I pay in advance?</summary><p>We will explain the payment method and timing when confirming your tour. Please do not send money to an unverified account.</p></details>
+        <details><summary>Is photography allowed on the Sanjay Colony community tour?</summary><p>Photography is not allowed on this experience. Guests are expected to respect residents' privacy and follow the guide's instructions.</p></details>
+        <details><summary>What if the website form does not work?</summary><p>Email <a href="mailto:delhiunlock007@gmail.com">delhiunlock007@gmail.com</a> or WhatsApp <a href="https://wa.me/919220409077" target="_blank" rel="noopener">+91 92204 09077</a> if the form does not work.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BOOKING ================= -->
+  <section class="section booking" id="booking">
+    <div class="wrap booking-grid">
+      <div>
+        <div class="eyebrow">Let's plan your visit</div>
+        <h2>Ready to discover Delhi with a local?</h2>
+        <p class="booking-intro">Share a few details and we'll try to contact you within 24 hours. Your enquiry is not a confirmed booking until we confirm availability.</p>
+        <div class="contact-card">
+          <div class="eyebrow">Prefer to talk first?</div>
+          <h3 style="font:500 1.6rem Georgia,serif;margin:8px 0">We're happy to help.</h3>
+          <p>Questions about a tour or a technical issue? Contact our team directly. We aim to reply to tour enquiries within 24 hours.</p>
+          <p><strong>Email:</strong><br><a href="mailto:delhiunlock007@gmail.com" style="color:#fff2d7;text-decoration:underline">delhiunlock007@gmail.com</a></p>
+          <p><strong>Phone / WhatsApp:</strong><br><a href="tel:+919220409077" style="color:#fff2d7;text-decoration:underline">+91 92204 09077</a></p>
+          <div class="modal-actions" style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-gold" target="_blank" rel="noopener"
+               href="https://wa.me/919220409077?text=Hello%20Delhi%20Unlocked%2C%20I%20would%20like%20to%20ask%20about%20a%20tour.">Chat on WhatsApp ↗</a>
+            <a class="btn btn-outline" style="color:#fff;border-color:#e5dfd0" href="mailto:delhiunlock007@gmail.com">Email us ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" id="enquiryForm">
+        <div class="form-grid">
+          <div class="field"><label for="name">Your full name *</label><input id="name" name="name" autocomplete="name" required placeholder="e.g. Alex Morgan"></div>
+          <div class="field"><label for="country">Country *</label><input id="country" name="country" required placeholder="Where are you travelling from?"></div>
+          <div class="field"><label for="email">Email address *</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+          <div class="field"><label for="whatsapp">WhatsApp / phone</label><input id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="Include country code"></div>
+          <div class="field"><label for="tour">Choose your tour *</label><select id="tour" name="tour" required><option value="">Select an experience</option></select></div>
+          <div class="field"><label for="date">Preferred date *</label><input id="date" name="date" type="date" required></div>
+          <div class="field"><label for="guests">Number of guests *</label><select id="guests" name="guests" required></select></div>
+          <div class="field"><label for="language">Preferred language</label>
+            <select id="language" name="language"><option>English</option><option>Hindi</option><option>Other / please discuss</option></select>
+          </div>
+          <div class="field full"><label for="message">Questions or special requests</label>
+            <textarea id="message" name="message" placeholder="Tell us your interests, hotel area, accessibility needs, or anything else we should know."></textarea>
+          </div>
+          <div class="field full">
+            <label style="display:flex;gap:10px;align-items:flex-start;font-weight:500">
+              <input style="width:auto;margin-top:5px" type="checkbox" id="privacy" required>
+              <span>I agree that Delhi Unlocked may use these details to respond to my enquiry. *</span>
+            </label>
+          </div>
+          <div class="field full">
+            <button class="btn btn-primary" type="submit">Send my tour enquiry ↗</button>
+            <p class="form-note">This form prepares your enquiry text. For a faster reply you can also contact us directly on WhatsApp.</p>
+            <div class="form-result" id="formResult" role="status"></div>
+            <button class="btn btn-outline" id="copyEnquiry" type="button" style="display:none;margin-top:10px">Copy enquiry text</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" class="brand" style="color:#fff3da">
+          <span class="brand-mark">
+            <img src="https://drive.google.com/thumbnail?id=1R_Q46xTV1OXJjcXdPQ0SjRh-P1ZULEYw&sz=w200" alt="Delhi Unlocked logo">
+          </span>
+          <span>DELHI <span style="color:var(--gold)">UNLOCKED</span></span>
+        </a>
+        <p>Discover the city behind the monuments with locally led experiences in Delhi and beyond.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <div class="footer-links">
+          <a href="#tours">All tours</a>
+          <a href="#about">Our story</a>
+          <a href="#faq">FAQs</a>
+          <a href="#booking">Book / enquire</a>
+          <a href="image.html">Image library</a>
+        </div>
+      </div>
+      <div>
+        <h3>Before you go</h3>
+        <div class="footer-links">
+          <a href="#faq">Booking information</a>
+          <a href="#faq">Privacy and photography</a>
+          <a href="#booking">Contact the team</a>
+          <a href="mailto:delhiunlock007@gmail.com">delhiunlock007@gmail.com</a>
+          <a href="tel:+919220409077">+91 92204 09077</a>
+          <a href="https://wa.me/919220409077" target="_blank" rel="noopener">WhatsApp us ↗</a>
+        </div>
+        <p style="font-size:.8rem">Add published privacy, cancellation and refund policies before launch.</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>© <span id="year"></span> Delhi Unlocked. All rights reserved.</span>
+      <span>Local stories. Thoughtful travel.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <a class="btn btn-primary" href="#tours">Explore tours</a>
+  <a class="btn btn-gold" href="#booking">Enquire now</a>
+</div>
+
+<!-- ================= TOUR MODAL =================
+     Only the top bar (title + close icon) is fixed.
+     No fixed footer — the tour page carries its own Book CTA. -->
+<div class="modal" id="tourModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 id="modalTitle">Tour details</h2>
+      <button class="modal-x" id="modalClose" type="button" aria-label="Cancel and close">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DELHI UNLOCKED — SINGLE SOURCE OF TRUTH
+   ===================================================================== */
+const TOURS = [
+  {
+    id: 'sanjay-colony',
+    name: 'Sanjay Colony Community Tour',
+    page: 'c_Sanjay_Colony_Community_Tour.html',
+    price: 2200, currency: '₹', unit: 'per person',
+    duration: '3 hours',
+    category: 'Community & culture',
+    tag: 'Community',
+    desc: 'Meet the people of Sanjay Colony and see everyday Delhi through the eyes of a local family — a respectful, eye-opening walk through a real neighbourhood.',
+    images: [
+      '1eNCnuSiNnbibPxCyi1v8ExLmO2Oe9g2I',
+      '1H5h4niuDurTkUe6130q-OqAsURsbBDSf',
+      '173_y8kgm5s-WwlrhKkB9P3STEly28aYe'
+    ]
+  },
+  {
+    id: 'old-delhi-walking',
+    name: 'Old Delhi Walking Tour',
+    page: 'a_Old_Delhi_Walking_Tour.html',
+    price: 1800, currency: '₹', unit: 'per person',
+    duration: '3–4 hours',
+    category: 'History & heritage',
+    tag: 'Most popular',
+    desc: 'Lose yourself in the lanes of Shahjahanabad: Chandni Chowk, the spice market, hidden temples, a Sikh gurdwara and a rooftop view over the old city.',
+    images: [
+      '1ltBXz-3xtdhpU7t9XbwMk_MRL1cADaUP',
+      '1NQfZ52_GNGyVkp60H7krFjKKOY8iQ3P_',
+      '1lwCjyWmbqBvY0EmP667k7VqAWMkcmgx0',
+      '1lTtilCuRNel1kJ3UK0vH8T51e039Fz7b',
+      '1c6J7YnkrqCffYfZbhrh5_sska8rVfpSr',
+      '16UubCWlWlqDzPbV4zXzmCqMVMTGgkVMG',
+      '1Ka24bpLpOS6MNL5dUfAolo_WoQ3npSPf',
+      '1g7dUBTL3kkDbDK-3U2DJVd0GFyak-531',
+      '1wASr0zzGrVc-DAu4WBCIYroY9nFTrtBz'
+    ]
+  },
+  {
+    id: 'old-delhi-food',
+    name: 'Old Delhi Food Tour',
+    page: 'b_Old_Delhi_Food_Tour.html',
+    price: 2500, currency: '₹', unit: 'per person',
+    duration: '3 hours',
+    category: 'Food & culture',
+    tag: 'Food',
+    desc: 'Eat your way through Chandni Chowk — parathas, chaat, kebabs, jalebi, chai and kulfi — with a local who knows exactly which stall to trust.',
+    images: [
+      '1qvlveKcRhehUFZ6KZvVMuzfgps0A5grm',
+      '1EY8WsnBniA78c5SpLSrrLdZr3UBZJzzE',
+      '1XuR4ctqi0nCjla0r3Td8VeD8nMH4nOOX',
+      '1VWD8Wh7nCMP8r-_BuRTRR8siqUlBUH6h',
+      '1KsuLogfRg9UwgBtytHdijSzOTn-RtUvI'
+    ]
+  },
+  {
+    id: 'night-tour',
+    name: 'New Delhi Night Tour',
+    page: 'd_Delhi_Night_Tour.html',
+    price: 2400, currency: '₹', unit: 'per person',
+    duration: '4 hours',
+    category: 'Evening experience',
+    tag: 'Evening',
+    desc: 'See the capital glowing after dark — India Gate, the wide Rajpath vistas, Connaught Place and a visit to a beautifully lit gurdwara.',
+    images: [
+      '1UZwKNLlqITJXmagzDtSNxXQTzUl1CYXk',
+      '1Or01sbSUW5xJTHR8QFJ90nvmPwF4ZrqI',
+      '1H_VK58s8RcmnozchrP7l6WNqYKMKw0jQ',
+      '1hEYJ0G-soTPKwz57_oLZ2uKnx6BKs7WP'
+    ]
+  },
+  {
+    id: 'metro-tour',
+    name: 'Old and New Delhi Tour by Metro',
+    page: 'e_Old_And_New_Delhi_by_Metro.html',
+    price: 2800, currency: '₹', unit: 'per person',
+    duration: '6–7 hours',
+    category: 'Full day',
+    tag: 'By metro',
+    desc: 'Travel like a Delhiite. Hop on the metro to connect Old Delhi’s bazaars with New Delhi’s monuments — fast, cheap, and a story in itself.',
+    images: [
+      '1SDXB5djHuEcEX1KmHWfUCQUSCDcVgcSq',
+      '1xc84pw22AaDeatk_p0tuyUaWQjOlbYlp',
+      '1UbTmj0hd0EYdCYMUJ0QrwJnO0jFK4EVJ'
+    ]
+  },
+  {
+    id: 'full-day',
+    name: 'Full-Day Delhi Sightseeing Tour',
+    page: 'f_Full_Day_Delhi_Sightseeing.html',
+    price: 4500, currency: '₹', unit: 'per person',
+    duration: '8 hours',
+    category: 'Full day',
+    tag: 'Full day',
+    desc: 'A comfortable private car and a local guide covering the greatest hits — Qutub Minar, Humayun’s Tomb, India Gate, Lotus Temple and Old Delhi.',
+    images: [
+      '1qpADv1GWaD2ji4XRggDUGcLX4EHVfvvJ',
+      '1cAaYr17JpRQvec4ZYLIX4lvOI6ehskaN',
+      '1doLaM0Hp41IoNyLBO5Uco7LKUI7vJffE',
+      '172UQg525McxdDqydfDvy2g_s7Xi6um6h'
+    ]
+  },
+  {
+    id: 'agra',
+    name: 'Same-Day Agra Tour',
+    page: 'g_Same_Day_Agra_Tour.html',
+    price: 7500, currency: '₹', unit: 'per person',
+    duration: '12–14 hours',
+    category: 'Day trip',
+    tag: 'Taj Mahal',
+    desc: 'Delhi to Agra and back in a day — the Taj Mahal at its most beautiful, Agra Fort, and the river-side gardens of Mehtab Bagh.',
+    images: [
+      '1-M6grd3YVlBpAlrKdU7hhkQ3BW6Tjad6',
+      '1v0wunPP2UkDS_uUKIWhHp_P5i3Y4hAQv',
+      '1o0S-FOfwqGHkK_zLkDxNP1pqGYy2YEEW'
+    ]
+  },
+  {
+    id: 'golden-triangle',
+    name: 'Golden Triangle: Delhi, Agra & Jaipur',
+    page: 'h_Golden_Triangle_Delhi_Agra_Jaipur.html',
+    price: 22000, currency: '₹', unit: 'per person',
+    duration: '3 days / 2 nights',
+    category: 'Multi-day',
+    tag: '3 days',
+    desc: 'India’s classic circuit — Delhi’s bazaars, the Taj Mahal at sunrise and the pink city of Jaipur — with private transport and a local guide throughout.',
+    images: [
+      '1dAchxF6LcQj0AQ5L5nTxmjUPKVAEKDXR',
+      '1NHi35-T_p3MqB3r_mn0eSydcCmFMrafz',
+      '15i200U1FG2vRUet3kRPlgG4pQ_atIfiR',
+      '1qtvWCk_818K-oUvpZPhdgPJ4T1WEE-Lw'
+    ]
+  }
+];
+
+/* ---------- helpers ---------- */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const drive = (id, w) => 'https://drive.google.com/thumbnail?id=' + id + '&sz=w' + (w || 1600);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ---------- carousel engine ---------- */
+function initSlideshows(root, delay) {
+  $$('.tour-slideshow', root || document).forEach(box => {
+    if (box.dataset.ready === '1') return;
+    box.dataset.ready = '1';
+    const slides = $$('img.slide', box);
+    if (slides.length < 2) return;
+    const dots = $('.slide-dots', box);
+    if (dots) $$('i', dots).forEach((d, i) => d.classList.toggle('active', i === 0));
+    let i = 0;
+    setInterval(() => {
+      slides[i].classList.remove('active');
+      if (dots) dots.children[i] && dots.children[i].classList.remove('active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('active');
+      if (dots) dots.children[i] && dots.children[i].classList.add('active');
+    }, delay || 1000);
+  });
+}
+
+/* ---------- tour card ---------- */
+function cardHTML(t) {
+  const imgs = t.images.map((id, i) =>
+    `<img class="slide${i === 0 ? ' active' : ''}" src="${drive(id, 1200)}" alt="${esc(t.name)} — photo ${i + 1}"${i ? ' loading="lazy"' : ''}>`
+  ).join('');
+  const dots = t.images.length > 1
+    ? `<div class="slide-dots">${t.images.map((_, i) => `<i class="${i === 0 ? 'active' : ''}"></i>`).join('')}</div>` : '';
+  return `
+  <article class="tour-card">
+    <div class="tour-image">
+      <div class="tour-slideshow">${imgs}${dots}</div>
+      <span class="tag">${esc(t.tag || t.category)}</span>
+    </div>
+    <div class="tour-body">
+      <div class="meta"><span>⏱ ${esc(t.duration)}</span><span>✦ ${esc(t.category)}</span></div>
+      <h3>${esc(t.name)}</h3>
+      <p>${esc(t.desc)}</p>
+      <div class="tour-foot">
+        <div class="price">${t.currency}${t.price.toLocaleString('en-IN')}<small>${esc(t.unit || '')}</small></div>
+        <button class="text-btn" type="button" data-tour="${esc(t.id)}">More details →</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderTours() {
+  $('#tourGrid').innerHTML = TOURS.map(cardHTML).join('');
+  initSlideshows($('#tourGrid'), 1000);
+}
+
+function renderGallery() {
+  $('#galleryGrid').innerHTML = TOURS.map(t => `
+    <div class="tour-card">
+      <div class="tour-image" style="height:170px">
+        <img src="${drive(t.images[0], 900)}" alt="${esc(t.name)}" loading="lazy">
+      </div>
+      <div class="tour-body" style="padding:14px">
+        <h3 style="font-size:1.05rem;margin:0 0 6px">${esc(t.tag || t.category)}</h3>
+        <p style="margin:0;font-size:.86rem">${esc(t.name)}</p>
+        <button class="text-btn" type="button" data-tour="${esc(t.id)}" style="padding-top:10px">More details →</button>
+      </div>
+    </div>`).join('');
+}
+
+/* ---------- enquiry form ---------- */
+function fillForm() {
+  const sel = $('#tour');
+  TOURS.forEach(t => {
+    const o = document.createElement('option');
+    o.value = t.name;
+    o.textContent = t.name;
+    sel.appendChild(o);
+  });
+  const g = $('#guests');
+  for (let i = 1; i <= 17; i++) {
+    const o = document.createElement('option');
+    o.value = i;
+    o.textContent = i + (i === 1 ? ' guest' : ' guests');
+    g.appendChild(o);
+  }
+}
+
+/* =====================================================================
+   MODAL — fixed top bar (dark navy, title + ✕). No footer.
+   ===================================================================== */
+const modal = $('#tourModal');
+const modalBody = $('#modalBody');
+let lastFocus = null;
+
+function openTour(id) {
+  const t = TOURS.find(x => x.id === id);
+  if (!t) return;
+  lastFocus = document.activeElement;
+
+  $('#modalTitle').textContent = t.name;
+
+  modalBody.innerHTML = '<div class="loader">Loading tour details…</div>';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(() => {
+    modalBody.innerHTML =
+      '<iframe id="tourFrame" src="' + t.page + '?embed=1" title="' + esc(t.name) +
+      '" loading="lazy" referrerpolicy="no-referrer"></iframe>';
+  }, 60);
+
+  try { history.replaceState(null, '', '#tour-' + t.id); } catch (e) {}
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  modalBody.innerHTML = '';
+  document.body.style.overflow = '';
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-tour]');
+  if (!btn) return;
+  e.preventDefault();
+  openTour(btn.getAttribute('data-tour'));
+});
+
+$('#modalClose').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+window.addEventListener('message', e => {
+  if (!e.data || e.data.type !== 'du-book') return;
+  const name = e.data.tour || '';
+  closeModal();
+  if (name) {
+    const sel = $('#tour');
+    const opt = Array.from(sel.options).find(o => o.value === name);
+    if (opt) sel.value = name;
+  }
+  document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => { const n = $('#name'); if (n) n.focus(); }, 700);
+});
+
+function initForm() {
+  const form = $('#enquiryForm');
+  const result = $('#formResult');
+  const copyBtn = $('#copyEnquiry');
+  let text = '';
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const d = new FormData(form);
+    text =
+      'DELHI UNLOCKED — TOUR ENQUIRY\n' +
+      '--------------------------------\n' +
+      'Name: ' + (d.get('name') || '') + '\n' +
+      'Country: ' + (d.get('country') || '') + '\n' +
+      'Email: ' + (d.get('email') || '') + '\n' +
+      'WhatsApp / Phone: ' + (d.get('whatsapp') || '-') + '\n' +
+      'Tour: ' + (d.get('tour') || '') + '\n' +
+      'Preferred date: ' + (d.get('date') || '') + '\n' +
+      'Guests: ' + (d.get('guests') || '') + '\n' +
+      'Language: ' + (d.get('language') || '') + '\n' +
+      'Message: ' + (d.get('message') || '-') + '\n';
+
+    result.style.display = 'block';
+    result.textContent = text;
+    copyBtn.style.display = 'inline-flex';
+    const wa = 'https://wa.me/919220409077?text=' + encodeURIComponent(text);
+    window.open(wa, '_blank', 'noopener');
+  });
+
+  copyBtn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(text); copyBtn.textContent = 'Copied ✓'; }
+    catch (err) { copyBtn.textContent = 'Select the text above to copy'; }
+    setTimeout(() => { copyBtn.textContent = 'Copy enquiry text'; }, 2500);
+  });
+}
+
+/* =====================================================================
+   GALLERY — auto-scroll, one card per second, loops back to the start.
+   Pauses briefly when the visitor touches / focuses the strip.
+   ===================================================================== */
+function initGalleryAutoScroll() {
+  const el = $('#galleryGrid');
+  if (!el) return;
+
+  const cards = $$('.tour-card', el);
+  if (cards.length < 2) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const INTERVAL = 1000;      // advance one card every second
+  const RESUME_AFTER = 3500;  // pause length after a user interaction
+
+  let idx = 0;
+  let paused = false;
+
+  const pause = () => {
+    paused = true;
+    clearTimeout(el._pauseT);
+    el._pauseT = setTimeout(() => { paused = false; }, RESUME_AFTER);
+  };
+  ['pointerdown', 'touchstart', 'focusin']
+    .forEach(ev => el.addEventListener(ev, pause, { passive: true }));
+
+  el._autoT = setInterval(() => {
+    if (paused) return;
+    if (el.scrollWidth <= el.clientWidth + 4) return;
+
+    const card = cards[idx];
+    if (!card) return;
+
+    const base = cards[0].offsetLeft;
+    const max = el.scrollWidth - el.clientWidth;
+    let target = card.offsetLeft - base;
+    if (target > max) target = max;
+
+    el.scrollTo({ left: target, behavior: 'smooth' });
+
+    idx = (idx + 1) % cards.length;
+  }, INTERVAL);
+}
+
+/* ---------- boot ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+renderTours();
+renderGallery();
+fillForm();
+initForm();
+initGalleryAutoScroll();
+
+(function deepLink() {
+  const m = location.hash.match(/^#tour-(.+)$/);
+  if (m) setTimeout(() => openTour(m[1]), 250);
+})();
+</script>
+</body>
+</html>

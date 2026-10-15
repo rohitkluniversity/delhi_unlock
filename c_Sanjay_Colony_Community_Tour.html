@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanjay Colony Community Tour | Delhi Unlocked</title>
+<style>
+:root{--green:#173d31;--cream:#f7f2e7;--paper:#fffdf7;--gold:#b88d43;--ink:#203129;--muted:#68736b;--line:#e7dfce}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{width:min(1000px,92%);margin:auto}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:Georgia,serif;font-weight:700;font-size:1.2rem;color:var(--green)}
+.brand-mark{width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold)}
+.nav .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:5px;font-weight:650;background:var(--green);color:#fff}
+.hero{position:relative;height:460px;overflow:hidden;background:#203129}
+.hero .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s}
+.hero .slide.active{opacity:1}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,42,32,.85),rgba(15,42,32,.1));z-index:1}
+.hero-content{position:absolute;left:0;right:0;bottom:0;z-index:2;color:#fff;padding:30px 0 40px}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:750;color:var(--gold)}
+.hero h1{font:500 clamp(1.8rem,4.5vw,2.9rem)/1.12 Georgia,serif;margin:10px 0 12px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:#e8e3d5;margin-top:8px}
+.meta span::before{content:"✦ ";color:var(--gold)}
+.section{padding:44px 0}.section h2{font:500 clamp(1.5rem,3vw,2.1rem)/1.2 Georgia,serif;color:var(--green);margin:6px 0 16px}
+.section p{color:#4b5852}
+.paper{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.list li{padding-left:22px;position:relative;color:#4b5852}
+.list li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.list.cross li::before{content:"✕";color:#a33}
+.list.dot li::before{content:"•";color:var(--gold);font-size:1.4rem;line-height:1;top:-2px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gallery img{width:100%;height:170px;object-fit:cover;border-radius:6px;cursor:zoom-in}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 18px;margin-bottom:8px}
+.faq summary{font-weight:700;color:var(--green);cursor:pointer}
+.faq details p{color:var(--muted);margin:8px 0 0}
+.cta{background:var(--green);color:#fff;padding:34px 0;text-align:center}
+.cta h2{color:#fff8e9;margin:6px 0 10px}.cta p{color:#d8e0d6;margin:0 0 18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:5px;font-weight:700;border:1px solid transparent;cursor:pointer}
+.btn-gold{background:var(--gold);color:#172b21}
+.btn-outline{background:transparent;color:#fff;border-color:#e5dfd0}
+.footer{background:#102d23;color:#cbd5cb;padding:26px 0;text-align:center;font-size:.85rem}
+@media(max-width:720px){.hero{height:360px}.grid2{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}}
+body.embed .nav,body.embed .footer,body.embed .cta{display:none}
+body.embed .section:first-of-type{padding-top:20px}
+.lightbox{position:fixed;inset:0;background:#000c;z-index:99;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}.lightbox img{max-width:100%;max-height:100%;border-radius:6px}
+</style>
+</head>
+<body>
+
+<header class="wrap nav">
+  <a href="index.html" class="brand"><span class="brand-mark">✦</span><span>DELHI <span style="color:var(--gold)">UNLOCKED</span></span></a>
+  <a class="btn" data-book href="index.html#booking">Book this tour ↗</a>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="slide active" src="https://drive.google.com/thumbnail?id=1eNCnuSiNnbibPxCyi1v8ExLmO2Oe9g2I&sz=w2000" alt="">
+    <img class="slide" src="https://drive.google.com/thumbnail?id=1H5h4niuDurTkUe6130q-OqAsURsbBDSf&sz=w2000" alt="">
+    <img class="slide" src="https://drive.google.com/thumbnail?id=173_y8kgm5s-WwlrhKkB9P3STEly28aYe&sz=w2000" alt="">
+    <div class="hero-content"><div class="wrap">
+      <div class="eyebrow">Community &amp; culture</div>
+      <h1>Sanjay Colony Community Tour</h1>
+      <div class="meta"><span>3 hours</span><span>Sanjay Colony, Okhla</span><span>From ₹2,200 / person</span></div>
+    </div></div>
+  </section>
+
+  <section class="section"><div class="wrap">
+    <div class="eyebrow">Overview</div>
+    <h2>A respectful look at everyday Delhi</h2>
+    <p>Sanjay Colony is a working-class neighbourhood in South Delhi shaped by migrants from across India. This is not a “slum tour” — it is a respectful, community-led walk in which residents share their own stories, homes, workshops and hopes. Our guiding principle is dignity: no photographs of residents, no drop-in visits, no pity.</p>
+    <p style="margin-top:8px"><strong>Photography is not permitted on this tour.</strong></p>
+  </div></section>
+
+  <section class="section" style="background:#fffaf0"><div class="wrap">
+    <div class="eyebrow">What to expect</div>
+    <h2>What you will see and hear</h2>
+    <div class="grid2">
+      <ul class="list">
+        <li>Walk through the community with a resident guide</li>
+        <li>Visit a small family workshop or craft unit</li>
+        <li>Learn about migration, work and everyday life</li>
+        <li>Stop at a local tea stall</li>
+        <li>Meet a community project or school (subject to availability)</li>
+      </ul>
+      <ul class="list dot">
+        <li>Small groups only</li>
+        <li>Photography prohibited out of respect</li>
+        <li>Modest dress recommended</li>
+        <li>All questions welcome</li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section class="section"><div class="wrap">
+    <div class="eyebrow">Practical info</div>
+    <h2>Meeting point &amp; inclusions</h2>
+    <div class="grid2">
+      <div class="paper"><h3 style="color:var(--green);margin:0 0 8px">Included</h3>
+        <ul class="list"><li>Resident guide</li><li>Community contribution</li><li>Bottled water</li><li>Chai at a local stall</li></ul>
+      </div>
+      <div class="paper"><h3 style="color:var(--green);margin:0 0 8px">Not included</h3>
+        <ul class="list cross"><li>Hotel pickup / drop</li><li>Any donation to projects you may visit (always optional)</li></ul>
+      </div>
+    </div>
+    <p style="margin-top:18px"><strong>Meeting point:</strong> Confirmed on WhatsApp one day before the tour.</p>
+  </div></section>
+
+  <section class="section" style="background:#fffaf0"><div class="wrap">
+    <div class="eyebrow">Gallery</div><h2>Neighbourhood scenes (no residents)</h2>
+    <div class="gallery">
+      <img src="https://drive.google.com/thumbnail?id=1eNCnuSiNnbibPxCyi1v8ExLmO2Oe9g2I&sz=w900" alt="">
+      <img src="https://drive.google.com/thumbnail?id=1H5h4niuDurTkUe6130q-OqAsURsbBDSf&sz=w900" alt="">
+      <img src="https://drive.google.com/thumbnail?id=173_y8kgm5s-WwlrhKkB9P3STEly28aYe&sz=w900" alt="">
+    </div>
+  </div></section>
+
+  <section class="section faq"><div class="wrap">
+    <div class="eyebrow">Good to know</div><h2>Frequently asked</h2>
+    <details><summary>Why is photography not allowed?</summary><p>Because the tour enters a residential area where people live and work. Our promise to the community is that no photographs of residents will be taken.</p></details>
+    <details><summary>Is this a “slum tour”?</summary><p>No. It is a community-led walk focused on dignity, learning and exchange — not voyeurism.</p></details>
+    <details><summary>How is the community compensated?</summary><p>A meaningful portion of the tour price goes directly to the community and to the resident guides who host you.</p></details>
+  </div></section>
+
+  <section class="cta"><div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)">Walk with respect</div>
+    <h2>Book the Sanjay Colony Community Tour</h2>
+    <p>Send an enquiry and we will confirm availability within 24 hours.</p>
+    <button class="btn btn-gold" data-book type="button">Book / Enquire ↗</button>
+  </div></section>
+</main>
+
+<footer class="footer">© Delhi Unlocked · Sanjay Colony Community Tour</footer>
+<div class="lightbox" id="lb"><img alt=""></div>
+
+<script>
+(function(){
+  if(location.search.indexOf('embed=1')>-1) document.body.classList.add('embed');
+  var s=document.querySelectorAll('.hero .slide'),i=0;
+  if(s.length>1){setInterval(function(){s[i].classList.remove('active');i=(i+1)%s.length;s[i].classList.add('active');},1000);}
+  document.querySelectorAll('[data-book]').forEach(function(b){b.addEventListener('click',function(e){
+    e.preventDefault();
+    if(window.parent!==window){window.parent.postMessage({type:'du-book',tour:'Sanjay Colony Community Tour'},'*');}
+    else{location.href='index.html#booking';}
+  });});
+  var lb=document.getElementById('lb'),im=lb.querySelector('img');
+  document.querySelectorAll('.gallery img').forEach(function(g){g.addEventListener('click',function(){im.src=g.src;lb.classList.add('open');});});
+  lb.addEventListener('click',function(){lb.classList.remove('open');});
+})();
+</script>
+</body>
+</html>

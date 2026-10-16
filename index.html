@@ -103,6 +103,25 @@ img{max-width:100%;display:block}
 .about-copy p{color:var(--muted)}
 .team-note{padding:16px 18px;background:#efe7d6;border-left:3px solid var(--gold);margin-top:20px;font-size:.92rem}
 
+/* ================= GUIDES / TEAM ================= */
+.guides-section{background:#fffaf0}
+.guide-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.guide-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 8px 25px rgba(31,49,41,.05);display:flex;flex-direction:column}
+.guide-card-body{padding:24px;display:flex;flex-direction:column;flex:1}
+.guide-avatar{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--green);color:#fff8e9;
+  display:grid;place-items:center;
+  font:700 1.6rem Georgia,serif;
+  margin-bottom:14px;
+  border:2px solid var(--gold);
+}
+.guide-card h3{font:500 1.6rem Georgia,serif;color:var(--green);margin:0 0 4px}
+.guide-role{font-size:.82rem;font-weight:750;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.guide-card p{color:#58665d;font-size:.93rem;margin:0 0 14px}
+.guide-card .role-detail{font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:auto}
+.guide-card .role-detail strong{color:var(--green)}
+
 .faq-list{max-width:850px;margin:auto}
 .faq-list details{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:17px 20px;margin-bottom:10px}
 .faq-list summary{font-weight:700;color:var(--green);cursor:pointer}
@@ -292,6 +311,7 @@ img{max-width:100%;display:block}
   .steps{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .footer-grid>div:first-child{grid-column:1/-1}
+  .guide-cards{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
   #galleryGrid .tour-card{flex:0 0 210px;max-width:210px}
@@ -354,6 +374,8 @@ img{max-width:100%;display:block}
     gap: 4px;
   }
   .btn-book-now .arrow{font-size:.85rem;}
+
+  .guide-cards{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -368,6 +390,7 @@ img{max-width:100%;display:block}
   </a>
   <nav class="navlinks">
     <a href="#tours">Our tours</a>
+    <a href="#guides">Guides &amp; Team</a>
     <a href="#about">Our story</a>
     <a href="#gallery">Photos</a>
     <a href="#faq">FAQs</a>
@@ -484,6 +507,49 @@ img{max-width:100%;display:block}
     </div>
   </section>
 
+  <!-- ================= GUIDES & TEAM ================= -->
+  <section class="section guides-section" id="guides">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">The people behind the experience</div>
+          <h2>Guides &amp; Team</h2>
+          <p>Meet the people who coordinate, guide and support Delhi Unlocked experiences — from the first enquiry to the last stop on your tour.</p>
+        </div>
+        <a class="btn btn-outline" href="#booking">Work with our team</a>
+      </div>
+      <div class="guide-cards">
+        <article class="guide-card">
+          <div class="guide-card-body">
+            <div class="guide-avatar">B</div>
+            <div class="guide-role">Team Leader &amp; Coordinator</div>
+            <h3>Badal</h3>
+            <p>Badal works full time with Delhi Unlocked, leading the team and coordinating tours, enquiries and guest arrangements.</p>
+            <div class="role-detail"><strong>Role:</strong> Team leadership, tour coordination, guest support and local experiences.</div>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="guide-card-body">
+            <div class="guide-avatar">S</div>
+            <div class="guide-role">Office &amp; Guest Support</div>
+            <h3>Sheetal</h3>
+            <p>Sheetal helps with office coordination, guest communication and the practical details that keep Delhi Unlocked experiences organised.</p>
+            <div class="role-detail"><strong>Role:</strong> Office support, guest communication and tour coordination.</div>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="guide-card-body">
+            <div class="guide-avatar">A</div>
+            <div class="guide-role">Office &amp; Guest Support</div>
+            <h3>Akash</h3>
+            <p>Akash manages the office side of Delhi Unlocked and is always ready to help guests and the team. He enjoys interacting with people, including supporting and communicating with people who are blind.</p>
+            <div class="role-detail"><strong>Role:</strong> Office management, guest support and team coordination.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= GALLERY ================= -->
   <section class="section" id="gallery">
     <div class="wrap">
@@ -587,6 +653,7 @@ img{max-width:100%;display:block}
         <h3>Explore</h3>
         <div class="footer-links">
           <a href="#tours">All tours</a>
+          <a href="#guides">Guides &amp; Team</a>
           <a href="#about">Our story</a>
           <a href="#faq">FAQs</a>
           <a href="#booking">Book / enquire</a>
@@ -660,7 +727,7 @@ const TOURS = [
     id: 'sanjay-colony',
     name: 'Sanjay Colony Community Tour',
     page: 'c_Sanjay_Colony_Community_Tour.html',
-    price: 1500, currency: '₹', unit: '/person',
+    price: 2200, currency: '₹', unit: '/person',
     duration: '3 hours',
     category: 'Community & culture',
     tag: 'Community',

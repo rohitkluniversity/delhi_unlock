@@ -727,7 +727,7 @@ const TOURS = [
     id: 'sanjay-colony',
     name: 'Sanjay Colony Community Tour',
     page: 'c_Sanjay_Colony_Community_Tour.html',
-    price: 2200, currency: '₹', unit: '/person',
+    price: 1500, currency: '₹', unit: '/person',
     duration: '3 hours',
     category: 'Community & culture',
     tag: 'Community',
@@ -842,7 +842,7 @@ const TOURS = [
     id: 'golden-triangle',
     name: 'Golden Triangle: Delhi, Agra & Jaipur',
     page: 'h_Golden_Triangle_Delhi_Agra_Jaipur.html',
-    price: 15000, currency: '₹', unit: '/person',
+    price: 22000, currency: '₹', unit: '/person',
     duration: '3 days / 2 nights',
     category: 'Multi-day',
     tag: '3 days',
@@ -961,7 +961,11 @@ function fillForm() {
 }
 
 /* =====================================================================
-   MODAL
+   MODAL  —  with browser back-button support
+   =====================================================================
+   When a tour is opened we push a history state (#tour-<id>).
+   Pressing the browser Back button triggers `popstate`, which closes
+   the modal and returns the user to where they were on the page.
    ===================================================================== */
 const modal = $('#tourModal');
 const modalBody = $('#modalBody');
@@ -972,20 +976,28 @@ const modalCurrency = $('#modalCurrency');
 const modalBookBtn = $('#modalBookBtn');
 let lastFocus = null;
 let currentTour = null;
+let modalOpen = false;
+
+/* Saved scroll position so Back returns the user exactly where they were */
+let savedScrollY = 0;
 
 function openTour(id) {
   const t = TOURS.find(x => x.id === id);
   if (!t) return;
+
+  /* Save current scroll position BEFORE opening the modal */
+  savedScrollY = window.scrollY || window.pageYOffset || 0;
+
   lastFocus = document.activeElement;
   currentTour = t;
 
-  /* Set title, price and currency in the bottom bar */
   modalBarTitle.textContent = t.name;
   modalPrice.textContent = formatPrice(t.price, modalCurrency.value);
   modalPriceNote.textContent = '/person';
 
   modalBody.innerHTML = '<div class="loader">Loading tour details…</div>';
   modal.classList.add('open');
+  modalOpen = true;
   document.body.style.overflow = 'hidden';
 
   setTimeout(() => {
@@ -994,17 +1006,49 @@ function openTour(id) {
       '" loading="lazy" referrerpolicy="no-referrer"></iframe>';
   }, 60);
 
-  try { history.replaceState(null, '', '#tour-' + t.id); } catch (e) {}
+  /* Push a history entry so the browser Back button closes the modal */
+  try {
+    history.pushState({ tourId: t.id }, '', '#tour-' + t.id);
+  } catch (e) {}
 }
 
-function closeModal() {
+/* Close the modal WITHOUT touching history — used internally
+   when we already know history is being handled (popstate). */
+function closeModalInternal() {
   modal.classList.remove('open');
   modalBody.innerHTML = '';
   document.body.style.overflow = '';
   currentTour = null;
-  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
-  if (lastFocus && lastFocus.focus) lastFocus.focus();
+  modalOpen = false;
+
+  /* Restore the scroll position the user had before opening */
+  try {
+    window.scrollTo(0, savedScrollY);
+  } catch (e) {}
+
+  if (lastFocus && lastFocus.focus) {
+    try { lastFocus.focus({ preventScroll: true }); } catch (e) {}
+  }
 }
+
+/* Close the modal via the ✕ button / overlay / Esc key.
+   This uses history.back() so that the pushed state is removed,
+   keeping the browser history clean. */
+function closeModal() {
+  if (!modalOpen) return;
+  try {
+    history.back();
+  } catch (e) {
+    closeModalInternal();
+  }
+}
+
+/* The browser Back button (or history.back()) lands here */
+window.addEventListener('popstate', () => {
+  if (modalOpen) {
+    closeModalInternal();
+  }
+});
 
 /* Currency change in modal */
 modalCurrency.addEventListener('change', () => {
@@ -1031,7 +1075,7 @@ document.addEventListener('click', e => {
 
 $('#modalClose').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalOpen) closeModal(); });
 
 window.addEventListener('message', e => {
   if (!e.data || e.data.type !== 'du-book') return;
@@ -1134,9 +1178,35 @@ fillForm();
 initForm();
 initGalleryAutoScroll();
 
+/* Deep-link support: opening index.html#tour-<id> opens that tour.
+   We push an extra history entry so Back returns to the page (without hash). */
 (function deepLink() {
   const m = location.hash.match(/^#tour-(.+)$/);
-  if (m) setTimeout(() => openTour(m[1]), 250);
+  if (m) {
+    setTimeout(() => {
+      const id = m[1];
+      const t = TOURS.find(x => x.id === id);
+      if (!t) return;
+      /* Open the tour, but replace the current entry instead of pushing
+         a duplicate so Back behaves naturally. */
+      savedScrollY = 0;
+      lastFocus = document.activeElement;
+      currentTour = t;
+      modalBarTitle.textContent = t.name;
+      modalPrice.textContent = formatPrice(t.price, modalCurrency.value);
+      modalPriceNote.textContent = '/person';
+      modalBody.innerHTML = '<div class="loader">Loading tour details…</div>';
+      modal.classList.add('open');
+      modalOpen = true;
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        modalBody.innerHTML =
+          '<iframe id="tourFrame" src="' + t.page + '?embed=1" title="' + esc(t.name) +
+          '" loading="lazy" referrerpolicy="no-referrer"></iframe>';
+      }, 60);
+      try { history.replaceState({ tourId: id }, '', '#tour-' + id); } catch (e) {}
+    }, 250);
+  }
 })();
 </script>
 </body>

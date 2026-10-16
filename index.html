@@ -184,7 +184,7 @@ img{max-width:100%;display:block}
 .modal-book-bar{
   flex:0 0 auto;
   border-top:1px solid var(--line);
-  background:var(--green); /* UPDATED: #173d31 */
+  background:var(--green);
   padding:14px 22px 16px;
   display:flex;
   flex-direction:column;
@@ -194,7 +194,7 @@ img{max-width:100%;display:block}
 
 .modal-book-bar .bar-title{
   font:700 1rem/1.25 Georgia,serif;
-  color:#fff8e9; /* light text on dark green */
+  color:#fff8e9;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -218,12 +218,12 @@ img{max-width:100%;display:block}
 }
 .modal-book-bar .price-amount{
   font:700 1.25rem/1.1 Georgia,serif;
-  color:#fff8e9; /* light text */
+  color:#fff8e9;
   white-space:nowrap;
 }
 .modal-book-bar .price-note{
   font-size:.78rem;
-  color:#d5ded5; /* muted light */
+  color:#d5ded5;
   white-space:nowrap;
 }
 .modal-book-bar .currency-select{
@@ -246,52 +246,36 @@ img{max-width:100%;display:block}
   margin-left:auto;
 }
 
-/* ===== PREMIUM 3D "BOOK NOW" BUTTON ===== */
+/* ===== SIMPLE BOOK NOW BUTTON ===== */
 .btn-book-now {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 9px 18px;
-  border-radius: 40px;
+  padding: 10px 22px;
+  border-radius: 6px;
   border: none;
   font-weight: 700;
-  font-size: .82rem;
+  font-size: .85rem;
   letter-spacing: .02em;
-  color: #172b21;
-  background: linear-gradient(145deg, #d9b56c, #b88d43);
-  box-shadow: 
-    0 6px 0 #7a5c28,
-    0 8px 18px rgba(0, 0, 0, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.45),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
-  transition: all 0.1s ease;
-  position: relative;
+  color: #fff;
+  background: #25D366;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   white-space: nowrap;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
   cursor: pointer;
-  line-height: 1;
-}
-.btn-book-now:active {
-  transform: translateY(5px);
-  box-shadow: 
-    0 1px 0 #7a5c28,
-    0 5px 12px rgba(0, 0, 0, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  line-height: 1.2;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
 }
 .btn-book-now:hover {
-  background: linear-gradient(145deg, #e2c07e, #c99a4a);
-  box-shadow: 
-    0 6px 0 #7a5c28,
-    0 8px 22px rgba(0, 0, 0, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.55),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+  background: #1ebe5b;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+}
+.btn-book-now:active {
+  transform: scale(0.97);
 }
 .btn-book-now .arrow {
   font-size: 1rem;
   line-height: 1;
-  transform: translateY(-1px);
 }
 
 @media(max-width:950px){
@@ -344,7 +328,7 @@ img{max-width:100%;display:block}
 
   .modal-x{top:10px;right:10px;width:38px;height:38px;font-size:1rem}
 
-  /* Modal bottom bar — mobile: keep button and price on same row */
+  /* Modal bottom bar — mobile */
   .modal-book-bar{padding:12px 14px 14px;gap:6px}
   .modal-book-bar .bar-title{font-size:.8rem;margin-bottom:2px}
   .modal-book-bar .bar-row{
@@ -364,8 +348,8 @@ img{max-width:100%;display:block}
   .modal-book-bar .currency-select{font-size:.7rem;padding:5px 7px;max-width:90px}
   .modal-book-bar .actions{margin-left:0;flex:0 0 auto;}
   .btn-book-now{
-    padding: 7px 14px;
-    font-size: .74rem;
+    padding: 8px 16px;
+    font-size: .76rem;
     white-space: nowrap;
     gap: 4px;
   }
@@ -607,6 +591,7 @@ img{max-width:100%;display:block}
           <a href="#faq">FAQs</a>
           <a href="#booking">Book / enquire</a>
           <a href="image.html">Image library</a>
+          <a href="https://www.instagram.com/delhi_unlock?utm_source=qr&dlrf=MWZidnhhM2NqbnM4NQ==" target="_blank" rel="noopener">Instagram: @delhi_unlock ↗</a>
         </div>
       </div>
       <div>
@@ -618,6 +603,7 @@ img{max-width:100%;display:block}
           <a href="mailto:delhiunlock007@gmail.com">delhiunlock007@gmail.com</a>
           <a href="tel:+919220409077">+91 92204 09077</a>
           <a href="https://wa.me/919220409077" target="_blank" rel="noopener">WhatsApp us ↗</a>
+          <a href="https://www.instagram.com/delhi_unlock?utm_source=qr&dlrf=MWZidnhhM2NqbnM4NQ==" target="_blank" rel="noopener">Follow on Instagram ↗</a>
         </div>
         <p style="font-size:.8rem">Add published privacy, cancellation and refund policies before launch.</p>
       </div>
@@ -674,7 +660,7 @@ const TOURS = [
     id: 'sanjay-colony',
     name: 'Sanjay Colony Community Tour',
     page: 'c_Sanjay_Colony_Community_Tour.html',
-    price: 2200, currency: '₹', unit: '/person',
+    price: 1500, currency: '₹', unit: '/person',
     duration: '3 hours',
     category: 'Community & culture',
     tag: 'Community',
@@ -959,18 +945,14 @@ modalCurrency.addEventListener('change', () => {
   modalPrice.textContent = formatPrice(currentTour.price, modalCurrency.value);
 });
 
-/* Book / Enquire from modal bottom bar */
+/* ===== BOOK NOW — redirect to WhatsApp ===== */
 modalBookBtn.addEventListener('click', () => {
   if (!currentTour) return;
-  const name = currentTour.name;
-  closeModal();
-  if (name) {
-    const sel = $('#tour');
-    const opt = Array.from(sel.options).find(o => o.value === name);
-    if (opt) sel.value = name;
-  }
-  document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => { const n = $('#name'); if (n) n.focus(); }, 700);
+  const msg = encodeURIComponent(
+    'Hello Delhi Unlocked! I would like to book the "' + currentTour.name + '" tour. ' +
+    'Please share availability and booking details.'
+  );
+  window.open('https://wa.me/919220409077?text=' + msg, '_blank', 'noopener');
 });
 
 document.addEventListener('click', e => {

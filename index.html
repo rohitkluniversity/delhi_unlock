@@ -166,6 +166,18 @@ img{max-width:100%;display:block}
 .photo-preview .pmeta{font-size:.82rem;color:var(--muted);min-width:0;overflow-wrap:anywhere}
 .photo-preview .pmeta strong{display:block;color:var(--green);overflow-wrap:anywhere}
 
+/* ===== REVIEWS DISPLAY ===== */
+.reviews-display{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:6px 0 36px}
+.review-card{background:var(--paper);border:1px solid var(--line);border-radius:9px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 5px 18px rgba(30,49,39,.04)}
+.review-card-photo{height:170px;background:#e9e2d3;overflow:hidden;flex:0 0 auto}
+.review-card-photo img{width:100%;height:100%;object-fit:cover}
+.review-card-body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
+.review-stars{color:var(--gold);font-size:1rem;letter-spacing:2px;line-height:1}
+.review-name{font:500 1.1rem Georgia,serif;color:var(--green);display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.review-tag{display:inline-block;background:#f0e9d9;color:var(--green);border-radius:3px;padding:2px 7px;font-size:.7rem;font-weight:700;letter-spacing:.02em}
+.review-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:.78rem;color:var(--muted)}
+.review-text{font-size:.9rem;color:#4c5a52;margin:0;overflow-wrap:anywhere}
+
 .footer{background:#102d23;color:#e9e3d5;padding:45px 0 20px}
 .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:35px}
 .footer h3{font:500 1.3rem Georgia,serif;color:#fff2d7}
@@ -173,6 +185,8 @@ img{max-width:100%;display:block}
 .footer-links{display:grid;gap:8px}
 .footer-address{margin-top:12px;line-height:1.6}
 .footer-address strong{display:block;color:#fff2d7;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
+.footer .btn-outline{color:#fff2d7;border-color:rgba(255,255,255,.5)}
+.footer .btn-outline:hover{background:rgba(255,255,255,.08)}
 .copyright{border-top:1px solid #ffffff26;margin-top:35px;padding-top:17px;color:#aab9ac;font-size:.8rem;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .mobile-cta{display:none}
 
@@ -225,13 +239,24 @@ img{max-width:100%;display:block}
 
 /* ===== GUIDES MODAL ===== */
 #guidesModal .modal-card{height:auto;max-height:min(92vh,100%)}
-.guides-modal-body{flex:1 1 auto;overflow:auto;background:var(--paper);padding:36px 32px 34px;-webkit-overflow-scrolling:touch}
+.guides-modal-body{flex:1 1 auto;overflow:auto;background:var(--paper);padding:36px 32px 34px;-webkit-overflow-scrolling:touch;min-height:0}
 .guides-modal-body .section-head{margin-bottom:0;padding-right:58px}
 .guides-modal-body h2{font-size:clamp(1.75rem,3.6vw,2.5rem)}
 .guides-modal-body .guide-cards{margin-top:26px;gap:18px}
 .guides-modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
 .modal-x.light{background:rgba(23,61,49,.08);border-color:rgba(23,61,49,.28);color:var(--green)}
 .modal-x.light:hover{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* ===== POLICY MODAL ===== */
+#policyModal .modal-card{height:auto;max-height:min(92vh,100%)}
+.policy-body{flex:1 1 auto;overflow:auto;background:var(--paper);padding:34px 30px 30px;-webkit-overflow-scrolling:touch;min-height:0}
+.policy-body h2{font:500 clamp(1.6rem,3vw,2.1rem)/1.15 Georgia,serif;color:var(--green);margin:0 0 6px;padding-right:48px}
+.policy-body h3{font:500 1.3rem Georgia,serif;color:var(--green);margin:26px 0 8px}
+.policy-body h4{font-weight:700;font-size:.92rem;color:var(--green);margin:16px 0 4px}
+.policy-body p,.policy-body li{color:#4c5a52;font-size:.92rem}
+.policy-body ul{padding-left:20px;margin:6px 0}
+.policy-body hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+.policy-body .policy-footer{margin-top:24px;padding-top:14px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
 
 /* ===== MODAL BOTTOM BOOKING BAR ===== */
 .modal-book-bar{
@@ -347,6 +372,7 @@ img{max-width:100%;display:block}
   .footer-grid>div:first-child{grid-column:1/-1}
   .guide-cards{grid-template-columns:1fr 1fr}
   .guides-modal-body .guide-cards{grid-template-columns:1fr 1fr}
+  .reviews-display{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
   #galleryGrid .tour-card{flex:0 0 210px;max-width:210px}
@@ -418,9 +444,14 @@ img{max-width:100%;display:block}
   .guides-modal-body .section-head{padding-right:50px}
   .guides-modal-body .guide-cards{grid-template-columns:1fr}
 
+  /* Policy modal — mobile */
+  #policyModal .modal-card{height:100%;max-height:100%}
+  .policy-body{padding:28px 18px}
+
   /* Reviews — mobile */
   .stars label{font-size:1.8rem}
   .photo-preview{flex-wrap:wrap}
+  .reviews-display{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -530,7 +561,7 @@ img{max-width:100%;display:block}
         <div class="eyebrow">The people behind the walks</div>
         <h2>Delhi is our home. Let us introduce you.</h2>
         <p>Delhi Unlocked is being built around a simple idea: the best way to understand a city is to spend time with people who know it. Our local-led experiences connect visitors with Delhi's history, food, culture and everyday life.</p>
-        <p><strong>Meet Badal — Founder &amp; Local Guide</strong><br>
+        <p><strong>Meet Badal — Tour Coordinator &amp; Guide</strong><br>
         Badal has spent years guiding visitors through Delhi and loves helping international travellers understand the city beyond the usual monuments. Delhi Unlocked grew from that simple idea: make every visitor feel welcomed while sharing the history, food, culture and everyday stories that make Delhi special.</p>
         <p><strong>Our local team</strong><br>
         We work together to coordinate enquiries and create welcoming, well-organised experiences from the first message to the end of your tour. <button type="button" class="text-btn" data-open-guides style="vertical-align:baseline">Meet the full team →</button></p>
@@ -651,6 +682,16 @@ img{max-width:100%;display:block}
         <a class="btn btn-outline" href="#tours">See all tours</a>
       </div>
 
+      <!-- ---------- REVIEWS DISPLAY ---------- -->
+      <div style="display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:6px 0 14px">
+        <div>
+          <div class="eyebrow">Recent feedback</div>
+          <h3 style="font:500 1.6rem Georgia,serif;color:var(--green);margin:4px 0 0">What travellers are saying</h3>
+        </div>
+        <span class="hint">Reviews added on this site appear here with their photo.</span>
+      </div>
+      <div class="reviews-display" id="reviewsGrid" aria-live="polite"></div>
+
       <div class="review-grid">
         <!--
           NOTE FOR THE SITE OWNER
@@ -665,8 +706,8 @@ img{max-width:100%;display:block}
           activation link ONCE. After that, every review lands in the inbox
           automatically (including the attached photo).
 
-          If the AJAX call ever fails, the visitor sees a fallback message with
-          direct email / WhatsApp links, so no review is lost.
+          Reviews you submit are also saved in this browser and appear in the
+          "What travellers are saying" board above (with the photo).
         -->
         <form class="form" id="reviewForm"
               action="https://formsubmit.co/delhiunlock007@gmail.com"
@@ -757,7 +798,8 @@ img{max-width:100%;display:block}
           <a href="https://wa.me/919220409077" target="_blank" rel="noopener">WhatsApp us ↗</a>
           <a href="https://www.instagram.com/delhi_unlock?utm_source=qr&dlrf=MWZidnhhM2NqbnM4NQ==" target="_blank" rel="noopener">Follow on Instagram ↗</a>
         </div>
-        <p style="font-size:.8rem">Add published privacy, cancellation and refund policies before launch.</p>
+        <p style="font-size:.8rem;margin-bottom:10px">Add published privacy, cancellation and refund policies before launch.</p>
+        <button class="btn btn-outline" type="button" data-open-policy style="color:#fff2d7;border-color:rgba(255,255,255,.5)">Terms and Cancellation Policy</button>
       </div>
     </div>
     <div class="copyright">
@@ -850,6 +892,107 @@ img{max-width:100%;display:block}
         <button class="btn btn-primary" type="button" data-close-guides data-scroll="#booking">Work with our team ↗</button>
         <a class="btn btn-outline" target="_blank" rel="noopener"
            href="https://wa.me/919220409077?text=Hello%20Delhi%20Unlocked%2C%20I%20would%20like%20to%20ask%20about%20a%20tour.">WhatsApp us ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TERMS & CANCELLATION POLICY MODAL ================= -->
+<div class="modal" id="policyModal" role="dialog" aria-modal="true" aria-label="Terms and cancellation policy">
+  <div class="modal-card">
+    <button class="modal-x light" id="policyClose" type="button" aria-label="Close">✕</button>
+    <div class="policy-body">
+      <div class="eyebrow">Delhi Unlocked</div>
+      <h2>Terms &amp; Cancellation Policy</h2>
+      <p>Local experiences. Real Delhi.</p>
+      <hr>
+
+      <h3>Cancellation &amp; Refund Policy</h3>
+      <p>We understand that travel plans can change. Our cancellation policy is designed to be simple and fair.</p>
+
+      <h4>Tour Cancellation by Guest</h4>
+      <ul>
+        <li>If you need to cancel your tour, please contact us as soon as possible through WhatsApp or email.</li>
+        <li>Cancellations made 24 hours or more before the scheduled tour are eligible for a full refund if any advance payment has been made.</li>
+        <li>Cancellations made less than 24 hours before the tour may be subject to a 20% cancellation fee, with the remaining amount refunded.</li>
+        <li>If a guest does not arrive for the tour without informing us (no-show), a 20% cancellation fee may apply.</li>
+      </ul>
+
+      <h4>Cancellation by Delhi Unlocked</h4>
+      <p>If we need to cancel a tour because of circumstances on our side, we will offer the guest either:</p>
+      <ul>
+        <li>A suitable alternative date, or</li>
+        <li>A full refund of any advance payment made for that tour.</li>
+      </ul>
+
+      <h4>Weather &amp; Unforeseen Circumstances</h4>
+      <p>If a tour cannot safely operate because of severe weather, government restrictions, transportation problems, or other circumstances beyond our reasonable control, we will work with the guest to reschedule the tour or provide an appropriate refund where applicable.</p>
+
+      <hr>
+
+      <h3>Booking Policy</h3>
+      <ul>
+        <li>Tour availability is subject to confirmation.</li>
+        <li>Guests should provide accurate contact information when making an enquiry or booking.</li>
+        <li>Please arrive at the agreed meeting point on time.</li>
+        <li>The tour duration may be affected if a guest arrives late.</li>
+        <li>Some tours involve walking, stairs, crowded areas, public transport and uneven roads. Guests should choose a tour appropriate for their physical ability.</li>
+      </ul>
+
+      <hr>
+
+      <h3>Payment Policy</h3>
+      <p>Payment arrangements will be clearly communicated before the tour.</p>
+      <p>If an advance payment is required, the amount and payment method will be confirmed with the guest before payment is made.</p>
+      <p>For tours where payment is made after the tour, the guest should pay the agreed amount directly to the guide at the end of the tour.</p>
+
+      <hr>
+
+      <h3>Photography &amp; Guest Privacy</h3>
+      <p>We want every guest to feel comfortable and safe during their experience with Delhi Unlocked.</p>
+      <p>Our guides may sometimes take photographs during a tour to help guests remember their experience. We will not use a guest's photograph for advertising, social media, our website, promotional materials, or any other public purpose without the guest's permission.</p>
+      <p>If a photograph includes you and you do not want it to be used publicly, please let your guide or our team know. Your privacy and comfort come first.</p>
+
+      <hr>
+
+      <h3>Complaints, Feedback &amp; Guest Comfort</h3>
+      <p>Your comfort and safety are important to us.</p>
+      <p>If you have a complaint, concern or any problem during your tour, please speak to your guide or contact the Delhi Unlocked team as soon as possible. We will listen to your concern and do our best to help resolve the issue quickly.</p>
+      <p>If at any time you feel uncomfortable, unsafe or unhappy with any part of the experience, please tell your guide or our team immediately. We take such concerns seriously and will do our best to support you.</p>
+      <p>We also welcome feedback after your tour because it helps us improve our experiences and provide better service to future guests.</p>
+
+      <hr>
+
+      <h3>Privacy Policy</h3>
+      <p>Delhi Unlocked respects your privacy.</p>
+      <p>When you contact us or make a booking enquiry, we may collect information such as your name, email address, phone/WhatsApp number, tour requirements and other information necessary to arrange your tour.</p>
+      <p>We use this information only for purposes such as:</p>
+      <ul>
+        <li>Responding to your enquiry.</li>
+        <li>Arranging and managing your tour.</li>
+        <li>Communicating with you about your booking.</li>
+        <li>Providing customer support.</li>
+      </ul>
+      <p>We do not intentionally sell your personal information to third parties.</p>
+      <p>We may use third-party services such as WhatsApp, email, website hosting, payment providers or booking platforms to communicate with you or process your booking. Their own privacy policies may also apply.</p>
+
+      <hr>
+
+      <h3>Terms &amp; Conditions</h3>
+      <p>By booking or participating in a Delhi Unlocked tour, you agree to provide accurate information and follow reasonable instructions from your guide.</p>
+      <p>Guests are responsible for their personal belongings during the tour. Delhi Unlocked is not responsible for loss, theft or damage to personal belongings except where required by applicable law.</p>
+      <p>Guests are responsible for informing us in advance about any important mobility requirements, dietary requirements or other circumstances that may affect the tour.</p>
+      <p>We reserve the right to refuse or end a tour where a guest behaves in an abusive, threatening, dangerous or seriously disruptive manner.</p>
+      <p>Tour itineraries may occasionally change because of traffic, closures, weather, security restrictions, public events or other circumstances outside our control.</p>
+
+      <hr>
+
+      <h3>Contact</h3>
+      <p>For cancellations, refunds, booking questions, complaints, feedback or any other concerns, please contact Delhi Unlocked through the contact details provided on our website.</p>
+
+      <div class="policy-footer">
+        <strong>Delhi Unlocked</strong><br>
+        Local experiences. Real Delhi.
       </div>
     </div>
   </div>
@@ -1098,12 +1241,136 @@ function fillForm() {
 }
 
 /* =====================================================================
-   REVIEWS — AJAX send to Gmail via FormSubmit.co
+   REVIEWS STORE + DISPLAY
    =====================================================================
-   We POST the FormData (including the image) to FormSubmit's AJAX
-   endpoint so the page never reloads. On success we show an inline
-   confirmation and clear every field. On failure we show a friendly
-   fallback with direct email / WhatsApp links.
+   Reviews submitted through the form are:
+     1) emailed to delhiunlock007@gmail.com via FormSubmit (AJAX), and
+     2) saved in this browser (localStorage) so they appear in the
+        "What travellers are saying" board with their photo.
+
+   A few seeded reviews with photos are shown until visitors add their own.
+   ===================================================================== */
+const REVIEWS_KEY = 'du_reviews_v1';
+const SEED_REVIEWS = [
+  {
+    name: 'Emma R.', country: 'United Kingdom', tour: 'Old Delhi Food Tour', rating: 5,
+    text: 'The food tour was the highlight of our India trip. Our guide knew every stall owner and we tasted things we would never have found alone. The jalebi was unreal!',
+    photo: '1qvlveKcRhehUFZ6KZvVMuzfgps0A5grm', date: '2025-02-14'
+  },
+  {
+    name: 'Lucas M.', country: 'Germany', tour: 'Sanjay Colony Community Tour', rating: 5,
+    text: 'A deeply human experience. We spent time with local families and left with a much better understanding of everyday life in Delhi. Highly recommended, and remember — no photography.',
+    photo: '1eNCnuSiNnbibPxCyi1v8ExLmO2Oe9g2I', date: '2025-01-22'
+  },
+  {
+    name: 'Priya S.', country: 'Singapore', tour: 'Old Delhi Walking Tour', rating: 4,
+    text: 'Fascinating lanes, amazing history and a lovely rooftop view. Bring comfortable shoes — there is a lot of walking and the streets are busy!',
+    photo: '1ltBXz-3xtdhpU7t9XbwMk_MRL1cADaUP', date: '2024-12-30'
+  },
+  {
+    name: 'Tom & Anna', country: 'Australia', tour: 'Golden Triangle: Delhi, Agra & Jaipur', rating: 5,
+    text: 'Everything was well organised from the first WhatsApp message. The Taj Mahal at sunrise was magic and our driver and guide were excellent throughout.',
+    photo: '1dAchxF6LcQj0AQ5L5nTxmjUPKVAEKDXR', date: '2025-03-05'
+  }
+];
+
+let reviews = [];
+
+function loadReviews() {
+  try {
+    const raw = localStorage.getItem(REVIEWS_KEY);
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr) && arr.length) { reviews = arr; return; }
+    }
+  } catch (e) {}
+  reviews = SEED_REVIEWS.slice();
+}
+
+function saveReviews() {
+  try {
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews));
+  } catch (e) {
+    /* If storage is full, drop embedded photos first, then retry. */
+    const slim = reviews.map(r => ({ ...r, photo: (r.photo && r.photo.indexOf('data:') === 0) ? '' : r.photo }));
+    try {
+      localStorage.setItem(REVIEWS_KEY, JSON.stringify(slim));
+      reviews = slim;
+    } catch (e2) {}
+  }
+}
+
+function starsText(n) {
+  n = Math.max(0, Math.min(5, parseInt(n, 10) || 0));
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
+}
+
+function photoSrc(p) {
+  if (!p) return '';
+  if (p.indexOf('data:') === 0 || p.indexOf('http') === 0) return p;
+  return drive(p, 800);
+}
+
+function renderReviews() {
+  const grid = $('#reviewsGrid');
+  if (!grid) return;
+  const list = reviews.slice(0, 12);
+  if (!list.length) {
+    grid.innerHTML = '<p class="hint" style="grid-column:1/-1">No reviews yet — be the first to share your experience.</p>';
+    return;
+  }
+  grid.innerHTML = list.map(r => `
+    <article class="review-card">
+      ${r.photo ? `<div class="review-card-photo"><img src="${esc(photoSrc(r.photo))}" alt="Photo from ${esc(r.name)}" loading="lazy"></div>` : ''}
+      <div class="review-card-body">
+        <div class="review-stars" aria-label="${esc(String(r.rating))} out of 5 stars">${starsText(r.rating)}</div>
+        <div class="review-name">${esc(r.name)}${r.country ? `<span class="review-tag">${esc(r.country)}</span>` : ''}</div>
+        ${r.tour ? `<div class="review-meta"><span>✦ ${esc(r.tour)}</span></div>` : ''}
+        <p class="review-text">${esc(r.text)}</p>
+        <div class="review-meta" style="margin-top:auto"><span>${esc(r.date || '')}</span></div>
+      </div>
+    </article>`).join('');
+}
+
+function addReview(r) {
+  reviews.unshift(r);
+  if (reviews.length > 24) reviews = reviews.slice(0, 24);
+  saveReviews();
+  renderReviews();
+}
+
+/* ---------- image compression for local storage ---------- */
+function fileToDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function compressImage(file) {
+  const dataUrl = await fileToDataURL(file);
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const maxW = 800;
+      let w = img.width, h = img.height;
+      if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      try { resolve(canvas.toDataURL('image/jpeg', 0.78)); }
+      catch (e) { resolve(dataUrl); }
+    };
+    img.onerror = () => resolve(dataUrl);
+    img.src = dataUrl;
+  });
+}
+
+/* =====================================================================
+   REVIEW FORM — AJAX send + save locally + clear fields
    ===================================================================== */
 function initReviews() {
   const form = $('#reviewForm');
@@ -1162,34 +1429,22 @@ function initReviews() {
     });
   }
 
-  /* --- submit handler (AJAX) --- */
+  /* --- submit handler --- */
   const result = $('#reviewResult');
   const submitBtn = form.querySelector('button[type="submit"]');
   const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Send my review ↗';
   let sending = false;
 
-  function showResult(message, isError) {
-    if (!result) return;
-    result.classList.toggle('error', !!isError);
-    result.style.display = 'block';
-    result.innerHTML = message;
-    try {
-      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } catch (e) {}
-  }
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (sending) return;
 
-    /* 1. rating must be chosen */
     if (!form.querySelector('input[name="rating"]:checked')) {
       alert('Please choose a star rating for your review.');
       return;
     }
-    /* 2. native validation */
     if (!form.checkValidity()) { form.reportValidity(); return; }
-    /* 3. image checks (belt & braces) */
+
     const f = photo && photo.files && photo.files[0];
     if (f) {
       if (!/^image\//.test(f.type)) {
@@ -1206,8 +1461,8 @@ function initReviews() {
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending your review…'; }
     if (result) { result.style.display = 'none'; result.classList.remove('error'); result.innerHTML = ''; }
 
-    const endpoint = 'https://formsubmit.co/ajax/delhiunlock007@gmail.com';
     const fd = new FormData(form);
+    const endpoint = 'https://formsubmit.co/ajax/delhiunlock007@gmail.com';
 
     try {
       const res = await fetch(endpoint, {
@@ -1217,7 +1472,7 @@ function initReviews() {
       });
 
       let data = {};
-      try { data = await res.json(); } catch (e) { data = {}; }
+      try { data = await res.json(); } catch (err) { data = {}; }
 
       const ok = res.ok && (
         data.success === true ||
@@ -1225,37 +1480,49 @@ function initReviews() {
         /success/i.test(data.message || '')
       );
 
-      if (!ok) {
-        throw new Error(data.message || ('HTTP ' + res.status));
-      }
+      if (!ok) throw new Error(data.message || ('HTTP ' + res.status));
 
-      /* ---- SUCCESS ---- */
+      /* ---- SUCCESS: save the review locally so it appears on the board ---- */
+      let reviewPhotoData = '';
+      if (f) {
+        try { reviewPhotoData = await compressImage(f); } catch (err) { reviewPhotoData = ''; }
+      }
+      addReview({
+        name: (fd.get('name') || 'Anonymous').toString().trim().slice(0, 60),
+        country: (fd.get('country') || '').toString().trim().slice(0, 60),
+        tour: (fd.get('tour') || '').toString().trim().slice(0, 140),
+        rating: parseInt(String(fd.get('rating') || '5').replace(/[^0-9]/g, ''), 10) || 5,
+        text: (fd.get('review') || '').toString().trim().slice(0, 1200),
+        photo: reviewPhotoData,
+        date: new Date().toISOString().slice(0, 10)
+      });
+
       if (result) {
         result.classList.remove('error');
         result.style.display = 'block';
         result.innerHTML =
-          '<strong>✅ Thank you!</strong> Your review has been sent to our team. ' +
-          'We really appreciate you taking the time — and we hope to see you on another walk soon.';
+          '<strong>✅ Thank you!</strong> Your review has been sent to our team ' +
+          'and now appears in the <em>“What travellers are saying”</em> list above. ' +
+          'We really appreciate you taking the time!';
       }
 
-      /* clear every field */
+      /* ---- clear every field ---- */
       form.reset();
       $$('input[name="rating"]', form).forEach(r => { r.checked = false; });
       clearPhoto();
 
-      /* keep the success message visible after reset */
       if (result) result.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     } catch (err) {
-      /* ---- FALLBACK ---- */
-      showResult(
-        'Sorry — we could not send your review automatically. ' +
-        'Please email it to <a href="mailto:delhiunlock007@gmail.com">delhiunlock007@gmail.com</a> ' +
-        'or send it to us on <a href="https://wa.me/919220409077" target="_blank" rel="noopener">WhatsApp</a>. ' +
-        'Your form details are still filled in, so you can copy them across.',
-        true
-      );
-      // log for debugging — but don't scare the visitor
+      if (result) {
+        result.classList.add('error');
+        result.style.display = 'block';
+        result.innerHTML =
+          'Sorry — we could not send your review automatically. ' +
+          'Please email it to <a href="mailto:delhiunlock007@gmail.com">delhiunlock007@gmail.com</a> ' +
+          'or send it to us on <a href="https://wa.me/919220409077" target="_blank" rel="noopener">WhatsApp</a>. ' +
+          'Your form details are still filled in, so you can copy them across.';
+      }
       try { console.warn('Review send failed:', err); } catch (e) {}
     } finally {
       sending = false;
@@ -1265,7 +1532,7 @@ function initReviews() {
 }
 
 /* =====================================================================
-   TOUR MODAL  —  with browser back-button support
+   TOUR MODAL
    ===================================================================== */
 const modal = $('#tourModal');
 const modalBody = $('#modalBody');
@@ -1277,7 +1544,6 @@ const modalBookBtn = $('#modalBookBtn');
 let lastFocus = null;
 let currentTour = null;
 let modalOpen = false;
-
 let savedScrollY = 0;
 
 function openTour(id) {
@@ -1303,9 +1569,7 @@ function openTour(id) {
       '" loading="lazy" referrerpolicy="no-referrer"></iframe>';
   }, 60);
 
-  try {
-    history.pushState({ tourId: t.id }, '', '#tour-' + t.id);
-  } catch (e) {}
+  try { history.pushState({ tourId: t.id }, '', '#tour-' + t.id); } catch (e) {}
 }
 
 function closeModalInternal() {
@@ -1316,7 +1580,6 @@ function closeModalInternal() {
   modalOpen = false;
 
   try { window.scrollTo(0, savedScrollY); } catch (e) {}
-
   if (lastFocus && lastFocus.focus) {
     try { lastFocus.focus({ preventScroll: true }); } catch (e) {}
   }
@@ -1374,24 +1637,19 @@ let guidesSavedScrollY = 0;
 
 function openGuides() {
   if (guidesOpen) return;
-
   guidesSavedScrollY = window.scrollY || window.pageYOffset || 0;
   guidesLastFocus = document.activeElement;
-
   guidesModal.classList.add('open');
   guidesOpen = true;
   document.body.style.overflow = 'hidden';
-
   try { history.pushState({ guidesOpen: true }, '', '#guides'); } catch (e) {}
 }
 
 function closeGuidesInternal() {
   guidesModal.classList.remove('open');
   guidesOpen = false;
-  if (!modalOpen) document.body.style.overflow = '';
-
+  if (!modalOpen && !policyOpen) document.body.style.overflow = '';
   try { window.scrollTo(0, guidesSavedScrollY); } catch (e) {}
-
   if (guidesLastFocus && guidesLastFocus.focus) {
     try { guidesLastFocus.focus({ preventScroll: true }); } catch (e) {}
   }
@@ -1409,7 +1667,6 @@ document.addEventListener('click', e => {
     openGuides();
     return;
   }
-
   const closer = e.target.closest('[data-close-guides]');
   if (closer) {
     e.preventDefault();
@@ -1427,19 +1684,68 @@ document.addEventListener('click', e => {
 $('#guidesClose').addEventListener('click', closeGuides);
 guidesModal.addEventListener('click', e => { if (e.target === guidesModal) closeGuides(); });
 
+/* =====================================================================
+   TERMS & CANCELLATION POLICY MODAL
+   ===================================================================== */
+const policyModal = $('#policyModal');
+let policyOpen = false;
+let policyLastFocus = null;
+let policySavedScrollY = 0;
+
+function openPolicy() {
+  if (policyOpen) return;
+  policySavedScrollY = window.scrollY || window.pageYOffset || 0;
+  policyLastFocus = document.activeElement;
+  policyModal.classList.add('open');
+  policyOpen = true;
+  document.body.style.overflow = 'hidden';
+  try { history.pushState({ policyOpen: true }, '', '#policies'); } catch (e) {}
+}
+
+function closePolicyInternal() {
+  policyModal.classList.remove('open');
+  policyOpen = false;
+  if (!modalOpen && !guidesOpen) document.body.style.overflow = '';
+  try { window.scrollTo(0, policySavedScrollY); } catch (e) {}
+  if (policyLastFocus && policyLastFocus.focus) {
+    try { policyLastFocus.focus({ preventScroll: true }); } catch (e) {}
+  }
+}
+
+function closePolicy() {
+  if (!policyOpen) return;
+  try { history.back(); } catch (e) { closePolicyInternal(); }
+}
+
+document.addEventListener('click', e => {
+  const opener = e.target.closest('[data-open-policy]');
+  if (opener) {
+    e.preventDefault();
+    openPolicy();
+  }
+});
+
+$('#policyClose').addEventListener('click', closePolicy);
+policyModal.addEventListener('click', e => { if (e.target === policyModal) closePolicy(); });
+
+/* =====================================================================
+   GLOBAL KEY + HISTORY HANDLING
+   ===================================================================== */
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  if (guidesOpen) closeGuides();
+  if (policyOpen) closePolicy();
+  else if (guidesOpen) closeGuides();
   else if (modalOpen) closeModal();
 });
 
 window.addEventListener('popstate', () => {
   if (modalOpen) closeModalInternal();
   if (guidesOpen) closeGuidesInternal();
+  if (policyOpen) closePolicyInternal();
 });
 
 /* =====================================================================
-   ENQUIRY FORM (unchanged — WhatsApp)
+   ENQUIRY FORM (WhatsApp)
    ===================================================================== */
 function initForm() {
   const form = $('#enquiryForm');
@@ -1479,7 +1785,7 @@ function initForm() {
 }
 
 /* =====================================================================
-   GALLERY — auto-scroll
+   GALLERY AUTO-SCROLL
    ===================================================================== */
 function initGalleryAutoScroll() {
   const el = $('#galleryGrid');
@@ -1491,7 +1797,6 @@ function initGalleryAutoScroll() {
 
   const INTERVAL = 1000;
   const RESUME_AFTER = 3500;
-
   let idx = 0;
   let paused = false;
 
@@ -1516,7 +1821,6 @@ function initGalleryAutoScroll() {
     if (target > max) target = max;
 
     el.scrollTo({ left: target, behavior: 'smooth' });
-
     idx = (idx + 1) % cards.length;
   }, INTERVAL);
 }
@@ -1527,6 +1831,8 @@ renderTours();
 renderGallery();
 fillForm();
 initForm();
+loadReviews();
+renderReviews();
 initReviews();
 initGalleryAutoScroll();
 

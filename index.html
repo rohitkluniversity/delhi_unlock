@@ -1248,9 +1248,10 @@ function fillForm() {
      2) saved in this browser (localStorage) so they appear in the
         "What travellers are saying" board with their photo.
 
-   A few seeded reviews with photos are shown until visitors add their own.
+   Only two seeded reviews are shown until visitors add their own.
+   The storage key is versioned so older cached reviews don't reappear.
    ===================================================================== */
-const REVIEWS_KEY = 'du_reviews_v1';
+const REVIEWS_KEY = 'du_reviews_v2';
 const SEED_REVIEWS = [
   {
     name: 'Emma R.', country: 'United Kingdom', tour: 'Old Delhi Food Tour', rating: 5,
@@ -1261,16 +1262,6 @@ const SEED_REVIEWS = [
     name: 'Lucas M.', country: 'Germany', tour: 'Sanjay Colony Community Tour', rating: 5,
     text: 'A deeply human experience. We spent time with local families and left with a much better understanding of everyday life in Delhi. Highly recommended, and remember — no photography.',
     photo: '1eNCnuSiNnbibPxCyi1v8ExLmO2Oe9g2I', date: '2025-01-22'
-  },
-  {
-    name: 'Priya S.', country: 'Singapore', tour: 'Old Delhi Walking Tour', rating: 4,
-    text: 'Fascinating lanes, amazing history and a lovely rooftop view. Bring comfortable shoes — there is a lot of walking and the streets are busy!',
-    photo: '1ltBXz-3xtdhpU7t9XbwMk_MRL1cADaUP', date: '2024-12-30'
-  },
-  {
-    name: 'Tom & Anna', country: 'Australia', tour: 'Golden Triangle: Delhi, Agra & Jaipur', rating: 5,
-    text: 'Everything was well organised from the first WhatsApp message. The Taj Mahal at sunrise was magic and our driver and guide were excellent throughout.',
-    photo: '1dAchxF6LcQj0AQ5L5nTxmjUPKVAEKDXR', date: '2025-03-05'
   }
 ];
 

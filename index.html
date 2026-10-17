@@ -103,8 +103,7 @@ img{max-width:100%;display:block}
 .about-copy p{color:var(--muted)}
 .team-note{padding:16px 18px;background:#efe7d6;border-left:3px solid var(--gold);margin-top:20px;font-size:.92rem}
 
-/* ================= GUIDES / TEAM ================= */
-.guides-section{background:#fffaf0}
+/* ================= GUIDES / TEAM CARDS ================= */
 .guide-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .guide-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 8px 25px rgba(31,49,41,.05);display:flex;flex-direction:column}
 .guide-card-body{padding:24px;display:flex;flex-direction:column;flex:1}
@@ -143,12 +142,37 @@ img{max-width:100%;display:block}
 .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid #b88d4366;border-color:var(--gold)}
 .form-note{font-size:.82rem;color:var(--muted);margin:13px 0}
 .form-result{display:none;padding:14px;background:#e8f0e7;border:1px solid #bdd1bd;color:#214c34;border-radius:5px;margin-top:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.form-result.error{background:#fdecea;border-color:#f3c2bd;color:#8b2a1e}
+.form-result a{text-decoration:underline}
+
+/* ================= REVIEWS ================= */
+.reviews-section{background:#fffaf0}
+.review-grid{max-width:840px}
+.field-label{font-size:.86rem;font-weight:700;color:var(--green)}
+.hint{font-size:.78rem;color:var(--muted)}
+.stars{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px;margin:2px 0 4px}
+.stars input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.stars label{font-size:2rem;line-height:1;color:#d9d2c2;cursor:pointer;padding:0 2px;transition:color .15s ease,transform .15s ease}
+.stars label:hover{transform:translateY(-2px)}
+.stars input:checked ~ label,
+.stars label:hover,
+.stars label:hover ~ label{color:var(--gold)}
+.stars input:focus-visible + label{outline:2px solid #b88d4366;outline-offset:2px;border-radius:4px}
+.stars-hint{font-size:.8rem;color:var(--muted)}
+.field input[type=file]{padding:10px;background:#fffefb}
+.photo-preview{display:none;align-items:center;gap:14px;margin-top:10px;padding:10px;border:1px dashed var(--line);border-radius:6px;background:#fffefb}
+.photo-preview.show{display:flex}
+.photo-preview img{width:84px;height:84px;object-fit:cover;border-radius:5px;border:1px solid var(--line);flex:0 0 auto}
+.photo-preview .pmeta{font-size:.82rem;color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.photo-preview .pmeta strong{display:block;color:var(--green);overflow-wrap:anywhere}
 
 .footer{background:#102d23;color:#e9e3d5;padding:45px 0 20px}
 .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:35px}
 .footer h3{font:500 1.3rem Georgia,serif;color:#fff2d7}
 .footer p,.footer a{color:#cbd5cb;font-size:.9rem}
 .footer-links{display:grid;gap:8px}
+.footer-address{margin-top:12px;line-height:1.6}
+.footer-address strong{display:block;color:#fff2d7;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
 .copyright{border-top:1px solid #ffffff26;margin-top:35px;padding-top:17px;color:#aab9ac;font-size:.8rem;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .mobile-cta{display:none}
 
@@ -198,6 +222,16 @@ img{max-width:100%;display:block}
 .modal-body{flex:1 1 auto;position:relative;overflow:auto;background:#fff;display:flex;-webkit-overflow-scrolling:touch}
 .modal-body iframe{flex:1 1 auto;width:100%;height:100%;min-height:70vh;border:0;display:block}
 .modal-body .loader{padding:40px;color:var(--muted);font-size:.95rem;margin:auto}
+
+/* ===== GUIDES MODAL ===== */
+#guidesModal .modal-card{height:auto;max-height:min(92vh,100%)}
+.guides-modal-body{flex:1 1 auto;overflow:auto;background:var(--paper);padding:36px 32px 34px;-webkit-overflow-scrolling:touch}
+.guides-modal-body .section-head{margin-bottom:0;padding-right:58px}
+.guides-modal-body h2{font-size:clamp(1.75rem,3.6vw,2.5rem)}
+.guides-modal-body .guide-cards{margin-top:26px;gap:18px}
+.guides-modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.modal-x.light{background:rgba(23,61,49,.08);border-color:rgba(23,61,49,.28);color:var(--green)}
+.modal-x.light:hover{background:var(--green);color:#fff;border-color:var(--green)}
 
 /* ===== MODAL BOTTOM BOOKING BAR ===== */
 .modal-book-bar{
@@ -312,6 +346,7 @@ img{max-width:100%;display:block}
   .footer-grid{grid-template-columns:1fr 1fr}
   .footer-grid>div:first-child{grid-column:1/-1}
   .guide-cards{grid-template-columns:1fr 1fr}
+  .guides-modal-body .guide-cards{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
   #galleryGrid .tour-card{flex:0 0 210px;max-width:210px}
@@ -376,6 +411,16 @@ img{max-width:100%;display:block}
   .btn-book-now .arrow{font-size:.85rem;}
 
   .guide-cards{grid-template-columns:1fr}
+
+  /* Guides modal — mobile */
+  #guidesModal .modal-card{height:auto;max-height:100%}
+  .guides-modal-body{padding:30px 18px 28px}
+  .guides-modal-body .section-head{padding-right:50px}
+  .guides-modal-body .guide-cards{grid-template-columns:1fr}
+
+  /* Reviews — mobile */
+  .stars label{font-size:1.8rem}
+  .photo-preview{flex-wrap:wrap}
 }
 </style>
 </head>
@@ -390,7 +435,7 @@ img{max-width:100%;display:block}
   </a>
   <nav class="navlinks">
     <a href="#tours">Our tours</a>
-    <a href="#guides">Guides &amp; Team</a>
+    <a href="#about" data-open-guides>Guides &amp; Team</a>
     <a href="#about">Our story</a>
     <a href="#gallery">Photos</a>
     <a href="#faq">FAQs</a>
@@ -410,7 +455,7 @@ img{max-width:100%;display:block}
           <a class="btn btn-gold" href="#tours">Explore our experiences ↗</a>
           <a class="btn btn-outline" target="_blank" rel="noopener"
              href="https://wa.me/919220409077?text=Hello%20Delhi%20Unlocked%2C%20I%20would%20like%20to%20enquire%20about%20a%20tour.">WhatsApp us ↗</a>
-          <a class="btn btn-outline" href="#about">Meet your local guides</a>
+          <button class="btn btn-outline" type="button" data-open-guides>Meet your local guides</button>
         </div>
         <div class="trustline">
           <span>Small-group Experiences</span>
@@ -488,7 +533,7 @@ img{max-width:100%;display:block}
         <p><strong>Meet Badal — Founder &amp; Local Guide</strong><br>
         Badal has spent years guiding visitors through Delhi and loves helping international travellers understand the city beyond the usual monuments. Delhi Unlocked grew from that simple idea: make every visitor feel welcomed while sharing the history, food, culture and everyday stories that make Delhi special.</p>
         <p><strong>Our local team</strong><br>
-        We work together to coordinate enquiries and create welcoming, well-organised experiences from the first message to the end of your tour.</p>
+        We work together to coordinate enquiries and create welcoming, well-organised experiences from the first message to the end of your tour. <button type="button" class="text-btn" data-open-guides style="vertical-align:baseline">Meet the full team →</button></p>
         <div class="team-note">We believe in honest information, thoughtful hosting and respectful encounters with the communities we visit.</div>
       </div>
     </div>
@@ -504,49 +549,6 @@ img{max-width:100%;display:block}
         <div class="step"><div class="step-no">01</div><h3>Local-led</h3><p>Explore Delhi with guides who know the city's streets, stories and everyday rhythm.</p></div>
         <div class="step"><div class="step-no">02</div><h3>Small &amp; personal</h3><p>Tell us your interests and group size so we can make the experience fit your trip.</p></div>
         <div class="step"><div class="step-no">03</div><h3>Clear details</h3><p>We discuss availability, meeting arrangements, inclusions and payment before confirmation.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= GUIDES & TEAM ================= -->
-  <section class="section guides-section" id="guides">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">The people behind the experience</div>
-          <h2>Guides &amp; Team</h2>
-          <p>Meet the people who coordinate, guide and support Delhi Unlocked experiences — from the first enquiry to the last stop on your tour.</p>
-        </div>
-        <a class="btn btn-outline" href="#booking">Work with our team</a>
-      </div>
-      <div class="guide-cards">
-        <article class="guide-card">
-          <div class="guide-card-body">
-            <div class="guide-avatar">B</div>
-            <div class="guide-role">Team Leader &amp; Coordinator</div>
-            <h3>Badal</h3>
-            <p>Badal works full time with Delhi Unlocked, leading the team and coordinating tours, enquiries and guest arrangements.</p>
-            <div class="role-detail"><strong>Role:</strong> Team leadership, tour coordination, guest support and local experiences.</div>
-          </div>
-        </article>
-        <article class="guide-card">
-          <div class="guide-card-body">
-            <div class="guide-avatar">S</div>
-            <div class="guide-role">Office &amp; Guest Support</div>
-            <h3>Sheetal</h3>
-            <p>Sheetal helps with office coordination, guest communication and the practical details that keep Delhi Unlocked experiences organised.</p>
-            <div class="role-detail"><strong>Role:</strong> Office support, guest communication and tour coordination.</div>
-          </div>
-        </article>
-        <article class="guide-card">
-          <div class="guide-card-body">
-            <div class="guide-avatar">A</div>
-            <div class="guide-role">Office &amp; Guest Support</div>
-            <h3>Akash</h3>
-            <p>Akash manages the office side of Delhi Unlocked and is always ready to help guests and the team. He enjoys interacting with people, including supporting and communicating with people who are blind.</p>
-            <div class="role-detail"><strong>Role:</strong> Office management, guest support and team coordination.</div>
-          </div>
-        </article>
       </div>
     </div>
   </section>
@@ -636,6 +638,83 @@ img{max-width:100%;display:block}
       </form>
     </div>
   </section>
+
+  <!-- ================= REVIEWS ================= -->
+  <section class="section reviews-section" id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Travellers' stories</div>
+          <h2>Write a review</h2>
+          <p>Taken a tour with us? Tell us how it went and add a photo if you like. Your review and picture are emailed straight to our team — we read every one.</p>
+        </div>
+        <a class="btn btn-outline" href="#tours">See all tours</a>
+      </div>
+
+      <div class="review-grid">
+        <!--
+          NOTE FOR THE SITE OWNER
+          ------------------------------------------------------------------
+          This form posts (AJAX) to FormSubmit.co, which forwards the review —
+          and the attached image — to delhiunlock007@gmail.com. No server is
+          needed.
+
+          IMPORTANT — ONE-TIME ACTIVATION:
+          The very first submission triggers an activation email from
+          FormSubmit to delhiunlock007@gmail.com. Open that email and click the
+          activation link ONCE. After that, every review lands in the inbox
+          automatically (including the attached photo).
+
+          If the AJAX call ever fails, the visitor sees a fallback message with
+          direct email / WhatsApp links, so no review is lost.
+        -->
+        <form class="form" id="reviewForm"
+              action="https://formsubmit.co/delhiunlock007@gmail.com"
+              method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="New review from the Delhi Unlocked website">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+
+          <div class="form-grid">
+            <div class="field"><label for="rvName">Your name *</label><input id="rvName" name="name" autocomplete="name" required placeholder="e.g. Alex Morgan"></div>
+            <div class="field"><label for="rvCountry">Country</label><input id="rvCountry" name="country" placeholder="Where are you from?"></div>
+            <div class="field"><label for="rvEmail">Email address *</label><input id="rvEmail" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+            <div class="field"><label for="rvTour">Tour taken *</label><select id="rvTour" name="tour" required><option value="">Select your tour</option></select></div>
+
+            <div class="field full">
+              <span class="field-label" id="ratingLabel">Your rating *</span>
+              <div class="stars" role="radiogroup" aria-labelledby="ratingLabel">
+                <input type="radio" id="star5" name="rating" value="5 stars" required><label for="star5" title="5 stars — excellent">★</label>
+                <input type="radio" id="star4" name="rating" value="4 stars"><label for="star4" title="4 stars — very good">★</label>
+                <input type="radio" id="star3" name="rating" value="3 stars"><label for="star3" title="3 stars — good">★</label>
+                <input type="radio" id="star2" name="rating" value="2 stars"><label for="star2" title="2 stars — fair">★</label>
+                <input type="radio" id="star1" name="rating" value="1 star"><label for="star1" title="1 star — poor">★</label>
+              </div>
+              <span class="stars-hint">Tap a star — 5 is excellent.</span>
+            </div>
+
+            <div class="field full"><label for="rvText">Your review *</label>
+              <textarea id="rvText" name="review" required minlength="15" placeholder="What did you enjoy most? Who was your guide? Anything future travellers should know?"></textarea>
+            </div>
+
+            <div class="field full">
+              <label for="rvPhoto">Add a photo (optional)</label>
+              <input id="rvPhoto" name="attachment" type="file" accept="image/*">
+              <span class="hint">JPG, PNG, GIF or WebP — up to 5&nbsp;MB.</span>
+              <div class="photo-preview" id="photoPreview"></div>
+            </div>
+
+            <div class="field full">
+              <button class="btn btn-primary" type="submit">Send my review ↗</button>
+              <p class="form-note">Your review is emailed to <a href="mailto:delhiunlock007@gmail.com" style="color:var(--green);text-decoration:underline">delhiunlock007@gmail.com</a>. If the form does not work, send it to that address or WhatsApp us — photos are welcome there too.</p>
+              <div class="form-result" id="reviewResult" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -649,14 +728,19 @@ img{max-width:100%;display:block}
           <span>DELHI <span style="color:var(--gold)">UNLOCKED</span></span>
         </a>
         <p>Discover the city behind the monuments with locally led experiences in Delhi and beyond.</p>
+        <p class="footer-address">
+          <strong>Address</strong>
+          279 Bal Mukund Khand, Giri Nagar, Kalkaji, New Delhi
+        </p>
       </div>
       <div>
         <h3>Explore</h3>
         <div class="footer-links">
           <a href="#tours">All tours</a>
-          <a href="#guides">Guides &amp; Team</a>
+          <a href="#about" data-open-guides>Guides &amp; Team</a>
           <a href="#about">Our story</a>
           <a href="#faq">FAQs</a>
+          <a href="#reviews">Write a review</a>
           <a href="#booking">Book / enquire</a>
           <a href="image.html">Image library</a>
           <a href="https://www.instagram.com/delhi_unlock?utm_source=qr&dlrf=MWZidnhhM2NqbnM4NQ==" target="_blank" rel="noopener">Instagram: @delhi_unlock ↗</a>
@@ -719,6 +803,58 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<!-- ================= GUIDES & TEAM MODAL ================= -->
+<div class="modal" id="guidesModal" role="dialog" aria-modal="true" aria-label="Guides and team">
+  <div class="modal-card">
+    <button class="modal-x light" id="guidesClose" type="button" aria-label="Close">✕</button>
+    <div class="guides-modal-body">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">The people behind the experience</div>
+          <h2>Guides &amp; Team</h2>
+          <p>Meet the people who coordinate, guide and support Delhi Unlocked experiences — from the first enquiry to the last stop on your tour.</p>
+        </div>
+      </div>
+
+      <div class="guide-cards">
+        <article class="guide-card">
+          <div class="guide-card-body">
+            <div class="guide-avatar">B</div>
+            <div class="guide-role">Team Leader &amp; Coordinator</div>
+            <h3>Badal</h3>
+            <p>Badal works full time with Delhi Unlocked, leading the team and coordinating tours, enquiries and guest arrangements.</p>
+            <div class="role-detail"><strong>Role:</strong> Team leadership, tour coordination, guest support and local experiences.</div>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="guide-card-body">
+            <div class="guide-avatar">S</div>
+            <div class="guide-role">Office &amp; Guest Support</div>
+            <h3>Sheetal</h3>
+            <p>Sheetal helps with office coordination, guest communication and the practical details that keep Delhi Unlocked experiences organised.</p>
+            <div class="role-detail"><strong>Role:</strong> Office support, guest communication and tour coordination.</div>
+          </div>
+        </article>
+        <article class="guide-card">
+          <div class="guide-card-body">
+            <div class="guide-avatar">A</div>
+            <div class="guide-role">Office &amp; Guest Support</div>
+            <h3>Akash</h3>
+            <p>Akash manages the office side of Delhi Unlocked and is always ready to help guests and the team. He enjoys interacting with people, including supporting and communicating with people who are blind.</p>
+            <div class="role-detail"><strong>Role:</strong> Office management, guest support and team coordination.</div>
+          </div>
+        </article>
+      </div>
+
+      <div class="guides-modal-actions">
+        <button class="btn btn-primary" type="button" data-close-guides data-scroll="#booking">Work with our team ↗</button>
+        <a class="btn btn-outline" target="_blank" rel="noopener"
+           href="https://wa.me/919220409077?text=Hello%20Delhi%20Unlocked%2C%20I%20would%20like%20to%20ask%20about%20a%20tour.">WhatsApp us ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 /* =====================================================================
    DELHI UNLOCKED — SINGLE SOURCE OF TRUTH
@@ -729,7 +865,7 @@ const TOURS = [
     name: 'Sanjay Colony Community Tour',
     page: 'c_Sanjay_Colony_Community_Tour.html',
     price: 1500, currency: '₹', unit: '/person',
-    duration: '3 hours',
+    duration: '1–2 hours',
     category: 'Community & culture',
     tag: 'Community',
     desc: 'Meet the people of Sanjay Colony and see everyday Delhi through the eyes of a local family — a respectful, eye-opening walk through a real neighbourhood.',
@@ -962,11 +1098,174 @@ function fillForm() {
 }
 
 /* =====================================================================
-   MODAL  —  with browser back-button support
+   REVIEWS — AJAX send to Gmail via FormSubmit.co
    =====================================================================
-   When a tour is opened we push a history state (#tour-<id>).
-   Pressing the browser Back button triggers `popstate`, which closes
-   the modal and returns the user to where they were on the page.
+   We POST the FormData (including the image) to FormSubmit's AJAX
+   endpoint so the page never reloads. On success we show an inline
+   confirmation and clear every field. On failure we show a friendly
+   fallback with direct email / WhatsApp links.
+   ===================================================================== */
+function initReviews() {
+  const form = $('#reviewForm');
+  if (!form) return;
+
+  /* --- tour dropdown --- */
+  const sel = $('#rvTour');
+  if (sel && sel.options.length <= 1) {
+    TOURS.forEach(t => {
+      const o = document.createElement('option');
+      o.value = t.name;
+      o.textContent = t.name;
+      sel.appendChild(o);
+    });
+    const other = document.createElement('option');
+    other.value = 'Other / custom trip';
+    other.textContent = 'Other / custom trip';
+    sel.appendChild(other);
+  }
+
+  /* --- photo picker: validate + preview --- */
+  const photo   = $('#rvPhoto');
+  const preview = $('#photoPreview');
+  const MAX = 5 * 1024 * 1024; // 5 MB
+
+  function clearPhoto() {
+    if (photo) photo.value = '';
+    if (preview) { preview.innerHTML = ''; preview.classList.remove('show'); }
+  }
+
+  if (photo && preview) {
+    photo.addEventListener('change', () => {
+      preview.innerHTML = '';
+      preview.classList.remove('show');
+      const f = photo.files && photo.files[0];
+      if (!f) return;
+      if (!/^image\//.test(f.type)) {
+        alert('Please choose an image file (JPG, PNG, GIF or WebP).');
+        clearPhoto();
+        return;
+      }
+      if (f.size > MAX) {
+        alert('That image is larger than 5 MB. Please choose a smaller photo.');
+        clearPhoto();
+        return;
+      }
+      const url = URL.createObjectURL(f);
+      preview.innerHTML =
+        '<img src="' + url + '" alt="Selected photo preview">' +
+        '<div class="pmeta"><strong>' + esc(f.name) + '</strong>' +
+        (f.size / 1024 / 1024).toFixed(2) + ' MB</div>' +
+        '<button type="button" class="text-btn" id="clearPhotoBtn">Remove</button>';
+      preview.classList.add('show');
+      const rm = $('#clearPhotoBtn');
+      if (rm) rm.addEventListener('click', clearPhoto);
+    });
+  }
+
+  /* --- submit handler (AJAX) --- */
+  const result = $('#reviewResult');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Send my review ↗';
+  let sending = false;
+
+  function showResult(message, isError) {
+    if (!result) return;
+    result.classList.toggle('error', !!isError);
+    result.style.display = 'block';
+    result.innerHTML = message;
+    try {
+      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (e) {}
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (sending) return;
+
+    /* 1. rating must be chosen */
+    if (!form.querySelector('input[name="rating"]:checked')) {
+      alert('Please choose a star rating for your review.');
+      return;
+    }
+    /* 2. native validation */
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    /* 3. image checks (belt & braces) */
+    const f = photo && photo.files && photo.files[0];
+    if (f) {
+      if (!/^image\//.test(f.type)) {
+        alert('Please choose an image file (JPG, PNG, GIF or WebP).');
+        return;
+      }
+      if (f.size > MAX) {
+        alert('That image is larger than 5 MB. Please choose a smaller photo.');
+        return;
+      }
+    }
+
+    sending = true;
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending your review…'; }
+    if (result) { result.style.display = 'none'; result.classList.remove('error'); result.innerHTML = ''; }
+
+    const endpoint = 'https://formsubmit.co/ajax/delhiunlock007@gmail.com';
+    const fd = new FormData(form);
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      let data = {};
+      try { data = await res.json(); } catch (e) { data = {}; }
+
+      const ok = res.ok && (
+        data.success === true ||
+        data.success === 'true' ||
+        /success/i.test(data.message || '')
+      );
+
+      if (!ok) {
+        throw new Error(data.message || ('HTTP ' + res.status));
+      }
+
+      /* ---- SUCCESS ---- */
+      if (result) {
+        result.classList.remove('error');
+        result.style.display = 'block';
+        result.innerHTML =
+          '<strong>✅ Thank you!</strong> Your review has been sent to our team. ' +
+          'We really appreciate you taking the time — and we hope to see you on another walk soon.';
+      }
+
+      /* clear every field */
+      form.reset();
+      $$('input[name="rating"]', form).forEach(r => { r.checked = false; });
+      clearPhoto();
+
+      /* keep the success message visible after reset */
+      if (result) result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    } catch (err) {
+      /* ---- FALLBACK ---- */
+      showResult(
+        'Sorry — we could not send your review automatically. ' +
+        'Please email it to <a href="mailto:delhiunlock007@gmail.com">delhiunlock007@gmail.com</a> ' +
+        'or send it to us on <a href="https://wa.me/919220409077" target="_blank" rel="noopener">WhatsApp</a>. ' +
+        'Your form details are still filled in, so you can copy them across.',
+        true
+      );
+      // log for debugging — but don't scare the visitor
+      try { console.warn('Review send failed:', err); } catch (e) {}
+    } finally {
+      sending = false;
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalBtnHTML; }
+    }
+  });
+}
+
+/* =====================================================================
+   TOUR MODAL  —  with browser back-button support
    ===================================================================== */
 const modal = $('#tourModal');
 const modalBody = $('#modalBody');
@@ -979,16 +1278,13 @@ let lastFocus = null;
 let currentTour = null;
 let modalOpen = false;
 
-/* Saved scroll position so Back returns the user exactly where they were */
 let savedScrollY = 0;
 
 function openTour(id) {
   const t = TOURS.find(x => x.id === id);
   if (!t) return;
 
-  /* Save current scroll position BEFORE opening the modal */
   savedScrollY = window.scrollY || window.pageYOffset || 0;
-
   lastFocus = document.activeElement;
   currentTour = t;
 
@@ -1007,14 +1303,11 @@ function openTour(id) {
       '" loading="lazy" referrerpolicy="no-referrer"></iframe>';
   }, 60);
 
-  /* Push a history entry so the browser Back button closes the modal */
   try {
     history.pushState({ tourId: t.id }, '', '#tour-' + t.id);
   } catch (e) {}
 }
 
-/* Close the modal WITHOUT touching history — used internally
-   when we already know history is being handled (popstate). */
 function closeModalInternal() {
   modal.classList.remove('open');
   modalBody.innerHTML = '';
@@ -1022,42 +1315,23 @@ function closeModalInternal() {
   currentTour = null;
   modalOpen = false;
 
-  /* Restore the scroll position the user had before opening */
-  try {
-    window.scrollTo(0, savedScrollY);
-  } catch (e) {}
+  try { window.scrollTo(0, savedScrollY); } catch (e) {}
 
   if (lastFocus && lastFocus.focus) {
     try { lastFocus.focus({ preventScroll: true }); } catch (e) {}
   }
 }
 
-/* Close the modal via the ✕ button / overlay / Esc key.
-   This uses history.back() so that the pushed state is removed,
-   keeping the browser history clean. */
 function closeModal() {
   if (!modalOpen) return;
-  try {
-    history.back();
-  } catch (e) {
-    closeModalInternal();
-  }
+  try { history.back(); } catch (e) { closeModalInternal(); }
 }
 
-/* The browser Back button (or history.back()) lands here */
-window.addEventListener('popstate', () => {
-  if (modalOpen) {
-    closeModalInternal();
-  }
-});
-
-/* Currency change in modal */
 modalCurrency.addEventListener('change', () => {
   if (!currentTour) return;
   modalPrice.textContent = formatPrice(currentTour.price, modalCurrency.value);
 });
 
-/* ===== BOOK NOW — redirect to WhatsApp ===== */
 modalBookBtn.addEventListener('click', () => {
   if (!currentTour) return;
   const msg = encodeURIComponent(
@@ -1076,7 +1350,6 @@ document.addEventListener('click', e => {
 
 $('#modalClose').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalOpen) closeModal(); });
 
 window.addEventListener('message', e => {
   if (!e.data || e.data.type !== 'du-book') return;
@@ -1091,6 +1364,83 @@ window.addEventListener('message', e => {
   setTimeout(() => { const n = $('#name'); if (n) n.focus(); }, 700);
 });
 
+/* =====================================================================
+   GUIDES & TEAM MODAL
+   ===================================================================== */
+const guidesModal = $('#guidesModal');
+let guidesOpen = false;
+let guidesLastFocus = null;
+let guidesSavedScrollY = 0;
+
+function openGuides() {
+  if (guidesOpen) return;
+
+  guidesSavedScrollY = window.scrollY || window.pageYOffset || 0;
+  guidesLastFocus = document.activeElement;
+
+  guidesModal.classList.add('open');
+  guidesOpen = true;
+  document.body.style.overflow = 'hidden';
+
+  try { history.pushState({ guidesOpen: true }, '', '#guides'); } catch (e) {}
+}
+
+function closeGuidesInternal() {
+  guidesModal.classList.remove('open');
+  guidesOpen = false;
+  if (!modalOpen) document.body.style.overflow = '';
+
+  try { window.scrollTo(0, guidesSavedScrollY); } catch (e) {}
+
+  if (guidesLastFocus && guidesLastFocus.focus) {
+    try { guidesLastFocus.focus({ preventScroll: true }); } catch (e) {}
+  }
+}
+
+function closeGuides() {
+  if (!guidesOpen) return;
+  try { history.back(); } catch (e) { closeGuidesInternal(); }
+}
+
+document.addEventListener('click', e => {
+  const opener = e.target.closest('[data-open-guides]');
+  if (opener) {
+    e.preventDefault();
+    openGuides();
+    return;
+  }
+
+  const closer = e.target.closest('[data-close-guides]');
+  if (closer) {
+    e.preventDefault();
+    const target = closer.getAttribute('data-scroll');
+    closeGuides();
+    if (target) {
+      setTimeout(() => {
+        const el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 170);
+    }
+  }
+});
+
+$('#guidesClose').addEventListener('click', closeGuides);
+guidesModal.addEventListener('click', e => { if (e.target === guidesModal) closeGuides(); });
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (guidesOpen) closeGuides();
+  else if (modalOpen) closeModal();
+});
+
+window.addEventListener('popstate', () => {
+  if (modalOpen) closeModalInternal();
+  if (guidesOpen) closeGuidesInternal();
+});
+
+/* =====================================================================
+   ENQUIRY FORM (unchanged — WhatsApp)
+   ===================================================================== */
 function initForm() {
   const form = $('#enquiryForm');
   const result = $('#formResult');
@@ -1177,10 +1527,10 @@ renderTours();
 renderGallery();
 fillForm();
 initForm();
+initReviews();
 initGalleryAutoScroll();
 
-/* Deep-link support: opening index.html#tour-<id> opens that tour.
-   We push an extra history entry so Back returns to the page (without hash). */
+/* Deep-link support: opening index.html#tour-<id> opens that tour. */
 (function deepLink() {
   const m = location.hash.match(/^#tour-(.+)$/);
   if (m) {
@@ -1188,8 +1538,6 @@ initGalleryAutoScroll();
       const id = m[1];
       const t = TOURS.find(x => x.id === id);
       if (!t) return;
-      /* Open the tour, but replace the current entry instead of pushing
-         a duplicate so Back behaves naturally. */
       savedScrollY = 0;
       lastFocus = document.activeElement;
       currentTour = t;
